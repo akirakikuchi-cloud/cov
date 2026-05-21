@@ -1,0 +1,4115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>タイミー初回受け入れ用マニュアル作成手順書</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAF5EC;
+  --bg-card: #FFFFFF;
+  --bg-soft: #FFF4E6;
+  --bg-warm: #FFE8DC;
+  --ink: #2A2520;
+  --ink-soft: #6B6258;
+  --ink-mute: #9C9489;
+  --primary: #FF6F3C;
+  --primary-dark: #E55A28;
+  --primary-soft: #FFD9C4;
+  --accent-yellow: #FFD700;
+  --accent-blue: #3B5BDB;
+  --accent-warn: #D9480F;
+  --success: #2DBA7B;
+  --rule: #E8DFD2;
+  --serif: 'Shippori Mincho B1', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  --sans: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+  --mono: 'JetBrains Mono', 'Menlo', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.75;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(255,111,60,0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255,215,0,0.05) 0%, transparent 50%);
+  pointer-events: none; z-index: 0;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+/* HERO */
+.hero {
+  padding: 72px 0 56px;
+  text-align: center;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 56px;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px;
+  background: var(--primary); color: #fff;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.15em;
+  border-radius: 999px;
+  margin-bottom: 22px;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; background: #fff; border-radius: 50%; }
+h1.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin-bottom: 18px;
+}
+h1.hero-title .accent { color: var(--primary); }
+.hero-sub {
+  font-size: 16px;
+  color: var(--ink-soft);
+  line-height: 1.8;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.hero-sub strong { color: var(--ink); font-weight: 700; }
+.hero-flow {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+.hero-flow-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--ink-soft);
+  background: var(--bg-card);
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--rule);
+}
+.hero-flow-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px;
+  background: var(--primary); color: #fff;
+  font-family: var(--mono);
+  font-size: 10px; font-weight: 700;
+  border-radius: 50%;
+}
+
+/* STEP SECTION */
+.step-section {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: 36px 40px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.step-section::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 36px; bottom: 36px;
+  width: 4px;
+  background: var(--primary);
+  border-radius: 0 4px 4px 0;
+}
+.step-header { margin-bottom: 24px; }
+.step-num {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--primary);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.step-title {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+.step-desc {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 640px) {
+  .step-section { padding: 28px 22px; border-radius: 12px; }
+  .step-section::before { top: 28px; bottom: 28px; }
+  .step-title { font-size: 20px; }
+}
+
+/* STEP 1: DESIGN GRID */
+.design-grid {
+  /* Mobile: Netflix-style horizontal scroll */
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-padding: 0 8px;
+  padding: 4px 4px 18px;
+  margin: 0 -4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+}
+.design-grid::-webkit-scrollbar { height: 8px; }
+.design-grid::-webkit-scrollbar-track { background: transparent; }
+.design-grid::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 4px; }
+.design-grid::-webkit-scrollbar-thumb:hover { background: var(--ink-mute); }
+
+@media (min-width: 640px) {
+  /* Desktop: 2-column grid */
+  .design-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    overflow-x: visible;
+    overflow-y: visible;
+    padding: 0;
+    margin: 0;
+    scroll-snap-type: none;
+  }
+}
+.design-card {
+  /* Mobile: ~78% width with peek of next card */
+  flex: 0 0 78%;
+  max-width: 320px;
+  scroll-snap-align: center;
+  display: block;
+  background: var(--bg-card);
+  border: 2px solid var(--rule);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+@media (min-width: 640px) {
+  .design-card {
+    flex: none;
+    max-width: none;
+  }
+}
+.design-card:hover {
+  border-color: var(--primary-soft);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255,111,60,0.10);
+}
+.design-card input[type="radio"] {
+  position: absolute; opacity: 0;
+  pointer-events: none;
+}
+.design-card.is-selected {
+  border-color: var(--primary);
+  box-shadow: 0 8px 26px rgba(255,111,60,0.22);
+}
+.design-card.is-selected::after {
+  content: '✓ 選択中';
+  position: absolute; top: 14px; right: 14px;
+  background: var(--primary); color: #fff;
+  padding: 5px 14px; border-radius: 999px;
+  font-size: 11.5px; font-weight: 800;
+  letter-spacing: 0.05em;
+  z-index: 3;
+  box-shadow: 0 4px 12px rgba(255,111,60,0.35);
+}
+.design-card[data-design="C"]::before {
+  content: '⭐ おすすめ';
+  position: absolute; top: 14px; left: 14px;
+  background: linear-gradient(135deg, #FFB400 0%, #FF8A00 100%);
+  color: #fff;
+  padding: 5px 12px; border-radius: 999px;
+  font-size: 11.5px; font-weight: 800;
+  letter-spacing: 0.04em;
+  z-index: 3;
+  box-shadow: 0 4px 12px rgba(255,138,0,0.4);
+}
+.design-card-img {
+  width: 100%; aspect-ratio: 16/9;
+  overflow: hidden;
+  background: var(--bg-soft);
+  position: relative;
+}
+.design-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform 0.3s;
+}
+.design-card:hover .design-card-img img {
+  transform: scale(1.03);
+}
+.design-card-info {
+  padding: 14px 16px 16px;
+}
+.design-letter {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px;
+  background: var(--primary); color: #fff;
+  border-radius: 50%;
+  font-family: var(--serif);
+  font-size: 14px; font-weight: 800;
+  margin-right: 10px;
+  vertical-align: middle;
+  box-shadow: 0 2px 6px rgba(255,111,60,0.3);
+}
+.design-card-info h3 {
+  display: inline-block;
+  font-family: var(--serif);
+  font-size: 15.5px; font-weight: 700;
+  vertical-align: middle;
+  margin: 0;
+}
+.design-card-info p {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin: 10px 0 10px;
+  line-height: 1.55;
+}
+.design-best-for {
+  display: inline-block;
+  font-size: 11px; font-weight: 600;
+  color: var(--ink);
+  background: var(--bg-soft);
+  padding: 4px 11px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+.design-card-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--rule);
+}
+.design-card-canva-link {
+  font-family: var(--mono);
+  font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  text-decoration: none;
+  padding: 4px 0;
+  display: inline-flex; align-items: center; gap: 4px;
+  position: relative; z-index: 5;
+}
+.design-card-canva-link:hover { text-decoration: underline; }
+.design-card-canva-link::after { content: '↗'; font-size: 12px; }
+.design-card-tip {
+  font-size: 10.5px;
+  color: var(--ink-mute);
+  font-style: italic;
+}
+
+/* Scroll hint on mobile */
+.design-scroll-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.design-scroll-hint::before { content: '←'; animation: scroll-hint-bounce 1.5s ease-in-out infinite; }
+.design-scroll-hint::after  { content: '→'; animation: scroll-hint-bounce 1.5s ease-in-out infinite reverse; }
+@keyframes scroll-hint-bounce {
+  0%, 100% { transform: translateX(0); opacity: 0.5; }
+  50%      { transform: translateX(-3px); opacity: 1; }
+}
+@media (min-width: 640px) {
+  .design-scroll-hint { display: none; }
+}
+
+/* Intro guidance bar before cards */
+.design-guidance {
+  background: linear-gradient(90deg, #FFF8F2 0%, #FFF4E6 100%);
+  border: 1px solid var(--primary-soft);
+  border-left: 4px solid var(--primary);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  display: flex; align-items: center; gap: 12px;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+.design-guidance-icon {
+  flex-shrink: 0;
+  font-size: 22px;
+}
+.design-guidance strong { color: var(--primary-dark); }
+.design-guidance .pill-c {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: linear-gradient(135deg, #FFB400 0%, #FF8A00 100%);
+  color: #fff; padding: 2px 10px; border-radius: 999px;
+  font-size: 11.5px; font-weight: 800;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+/* STEP 2: JOB FORM */
+.job-form { display: grid; gap: 14px; }
+.job-field-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+@media (max-width: 640px) {
+  .job-field-row { grid-template-columns: 1fr; gap: 4px; }
+}
+.job-field-row label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  padding-top: 10px;
+}
+.job-field-row label .req {
+  color: var(--primary);
+  font-size: 10px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+.job-field-row input[type="text"],
+.job-field-row select,
+.job-field-row textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--rule);
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 14px;
+  background: #fff;
+  color: var(--ink);
+  transition: border-color 0.2s;
+}
+.job-field-row input:focus,
+.job-field-row select:focus,
+.job-field-row textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255,111,60,0.12);
+}
+.job-field-row textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: var(--sans);
+  line-height: 1.6;
+}
+.job-field-row textarea#job-description {
+  min-height: 140px;
+}
+
+/* STEP 3: VIDEO UPLOAD */
+.video-upload-wrapper {
+  border: 2px dashed var(--rule);
+  border-radius: 10px;
+  padding: 24px;
+  background: var(--bg-soft);
+  text-align: center;
+  margin-bottom: 20px;
+  transition: border-color 0.2s;
+}
+.video-upload-wrapper:hover { border-color: var(--primary-soft); }
+.video-upload-wrapper input[type="file"] {
+  font-size: 14px;
+  margin: 8px 0;
+}
+.video-upload-hint {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-top: 8px;
+}
+
+.mode-block {
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+}
+.mode-block-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--primary-dark);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.mode-options { display: grid; gap: 10px; }
+.mode-option {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1.5px solid var(--rule);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.mode-option:hover { border-color: var(--primary-soft); }
+.mode-option input[type="radio"] {
+  margin-top: 4px;
+  cursor: pointer;
+  accent-color: var(--primary);
+}
+.mode-option:has(input:checked) {
+  border-color: var(--primary);
+  background: var(--bg-soft);
+}
+.mode-option-text { font-size: 13px; font-weight: 700; }
+.mode-option-sub { font-size: 11.5px; color: var(--ink-soft); margin-top: 2px; }
+
+.mode-detail {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+.mode-detail input[type="number"] {
+  padding: 6px 10px;
+  width: 90px;
+  border: 1.5px solid var(--rule);
+  border-radius: 6px;
+  font-size: 13px;
+}
+.mode-detail textarea {
+  width: 100%;
+  height: 110px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--rule);
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 12px;
+  resize: vertical;
+  margin-top: 6px;
+}
+.mode-detail .help-text {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.embed-text-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 16px;
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  margin: 12px 0 18px;
+  cursor: pointer;
+}
+.embed-text-row input[type="checkbox"] {
+  accent-color: var(--primary);
+  width: 16px; height: 16px;
+  cursor: pointer;
+}
+.embed-text-row-text {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+}
+.embed-text-row-sub {
+  display: block;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px;
+  padding: 13px 22px;
+  background: linear-gradient(135deg, var(--primary) 0%, #FF8B5A 100%);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 14.5px; font-weight: 700;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,111,60,0.35); }
+.btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  color: #888;
+}
+.btn-block { width: 100%; }
+.btn-success {
+  background: linear-gradient(135deg, var(--success) 0%, #4DC78F 100%);
+}
+.btn-success:hover { box-shadow: 0 8px 20px rgba(45,186,123,0.4); }
+
+.btn-link-out {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 6px;
+  padding: 9px 16px;
+  background: var(--accent-blue);
+  color: #fff !important;
+  font-size: 12.5px; font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-link-out:hover { background: #2A4AC0; transform: translateY(-1px); }
+.btn-link-out::after { content: '↗'; opacity: 0.85; }
+
+/* Status */
+.status-area {
+  margin-top: 16px;
+  min-height: 24px;
+}
+.status-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 8px;
+  text-align: center;
+}
+.status-text.is-success { color: var(--success); }
+.status-text.is-error { color: var(--accent-warn); }
+progress {
+  width: 100%;
+  height: 8px;
+  display: none;
+  border: none;
+  border-radius: 4px;
+  background: var(--bg-soft);
+}
+progress::-webkit-progress-bar { background: var(--bg-soft); border-radius: 4px; }
+progress::-webkit-progress-value {
+  background: linear-gradient(90deg, var(--primary), var(--accent-yellow));
+  border-radius: 4px;
+}
+progress::-moz-progress-bar { background: var(--primary); }
+
+/* STEP 4: PREVIEW */
+.preview-wrapper {
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+.preview-toolbar {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.preview-toolbar-label { font-weight: 700; letter-spacing: 0.05em; }
+
+#doc-preview {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 32px 40px;
+  min-height: 320px;
+  max-height: 900px;
+  overflow-y: auto;
+  font-family: Arial, "Yu Gothic", "Meiryo", sans-serif;
+  font-size: 11pt;
+  line-height: 1.8;
+  color: #000;
+  outline: none;
+}
+#doc-preview:empty::before {
+  content: "ここに生成されたドキュメントが表示されます。\A生成後、テキストを直接クリックして編集できます。";
+  color: #9aa0a6;
+  white-space: pre-wrap;
+  font-size: 13px;
+}
+#doc-preview h2 {
+  font-size: 16pt;
+  margin: 0 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--primary);
+  color: var(--primary-dark);
+  font-family: var(--serif);
+}
+#doc-preview h3 {
+  font-size: 13pt;
+  margin: 20px 0 10px;
+  padding: 6px 12px;
+  background: var(--bg-soft);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 6px 6px 0;
+}
+#doc-preview p { margin: 0 0 8px 0; }
+#doc-preview .timestamp {
+  color: var(--primary-dark);
+  font-weight: bold;
+  font-family: var(--mono);
+  background: var(--bg-soft);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10.5pt;
+}
+#doc-preview img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px 0 20px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+#doc-preview .job-field {
+  margin-bottom: 14px;
+}
+#doc-preview .job-label {
+  font-weight: 700;
+  font-size: 10.5pt;
+  color: var(--ink);
+  margin-bottom: 4px;
+  display: block;
+}
+#doc-preview .job-label::before { content: '【'; }
+#doc-preview .job-label::after { content: '】'; }
+#doc-preview .job-value {
+  display: block;
+  white-space: pre-wrap;
+  font-size: 11pt;
+  padding-left: 4px;
+}
+.edit-placeholder { color: #ccc; font-style: italic; }
+
+.download-area { text-align: center; }
+.download-area .btn { font-size: 16px; padding: 16px 32px; }
+.download-area-hint {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-top: 10px;
+}
+
+/* STEP 5 (revealed after download) */
+#step5 { display: none; }
+#step5.is-revealed {
+  display: block;
+  animation: stepRevealIn 0.5s ease-out;
+}
+@keyframes stepRevealIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+#step5.is-revealed {
+  background: linear-gradient(135deg, #FFFCF7 0%, #FFF4E6 100%);
+  border-color: var(--primary-soft);
+}
+
+.celebration-banner {
+  background: linear-gradient(135deg, var(--success) 0%, #4DC78F 100%);
+  color: #fff;
+  padding: 16px 22px;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.celebration-banner::before { content: '🎉'; font-size: 22px; }
+
+.phase-card {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 22px 26px;
+  margin-bottom: 16px;
+}
+.phase-num {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--primary);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+.phase-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.phase-steps {
+  list-style: none;
+  counter-reset: phaseStep;
+  margin: 0;
+}
+.phase-steps > li {
+  counter-increment: phaseStep;
+  padding: 8px 0 8px 36px;
+  position: relative;
+  font-size: 13.5px;
+  line-height: 1.75;
+}
+.phase-steps > li::before {
+  content: counter(phaseStep);
+  position: absolute;
+  left: 0; top: 8px;
+  width: 24px; height: 24px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.prompt-card {
+  margin: 12px 0 4px;
+  background: #2A2520;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,111,60,0.25);
+}
+.prompt-card-header {
+  padding: 8px 14px;
+  background: rgba(255,111,60,0.18);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.prompt-card-label {
+  font-size: 10.5px;
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+.prompt-card-copy {
+  background: var(--primary);
+  color: #fff;
+  border: 0;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: background 0.2s;
+}
+.prompt-card-copy:hover { background: var(--primary-dark); }
+.prompt-card-copy.is-copied { background: var(--success); }
+.prompt-card-content {
+  padding: 14px 16px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #F4EDE2;
+  line-height: 1.7;
+  max-height: 280px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.prompt-card-content::-webkit-scrollbar { width: 5px; }
+.prompt-card-content::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+.prompt-card-content::-webkit-scrollbar-thumb { background: rgba(255,111,60,0.45); border-radius: 3px; }
+
+.selected-design-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--primary);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.selected-design-pill .pill-letter {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px;
+  background: rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 50%;
+  font-family: var(--serif);
+  font-size: 11px;
+}
+
+.warn-note {
+  background: #FFF1EC;
+  border-left: 3px solid var(--accent-warn);
+  padding: 10px 14px;
+  border-radius: 0 6px 6px 0;
+  font-size: 12.5px;
+  margin: 10px 0;
+  color: var(--ink);
+}
+.warn-note strong { color: var(--accent-warn); }
+
+.kbd {
+  font-family: var(--mono);
+  background: var(--bg-soft);
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-size: 12px;
+  border: 1px solid var(--rule);
+}
+
+footer {
+  margin: 60px 0 32px;
+  padding: 24px 0;
+  border-top: 1px solid var(--rule);
+  font-size: 12px;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+/* ============ CANVA PREVIEW BAR (top) ============ */
+.canva-preview-bar {
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin: 0 0 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 12.5px;
+}
+.canva-preview-label {
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+.canva-preview-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.canva-preview-link:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.canva-preview-link::after {
+  content: '↗';
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+/* ============ SHOOTING GUIDE CAROUSEL ============ */
+.shooting-guide-section {
+  background: linear-gradient(135deg, #FFF8F2 0%, #FFFCF7 100%);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 20px 22px 22px;
+  margin-bottom: 20px;
+}
+.shooting-guide-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.shooting-guide-desc {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+.guide-carousel { position: relative; }
+.guide-track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 4px 4px 12px;
+  -webkit-overflow-scrolling: touch;
+}
+.guide-track::-webkit-scrollbar { height: 5px; }
+.guide-track::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 3px; }
+.guide-track::-webkit-scrollbar-thumb { background: var(--primary-soft); border-radius: 3px; }
+.guide-card {
+  flex: 0 0 200px;
+  scroll-snap-align: start;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.guide-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+  border-color: var(--primary-soft);
+}
+.guide-card-img {
+  width: 100%; aspect-ratio: 16/9;
+  overflow: hidden; background: var(--bg-soft);
+}
+.guide-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.guide-card-info { padding: 10px 12px; }
+.guide-card-industry {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.guide-card-title {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.guide-card-duration {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--primary-dark);
+  background: var(--bg-soft);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.guide-carousel-btn {
+  position: absolute;
+  top: 38%;
+  transform: translateY(-50%);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid var(--rule);
+  cursor: pointer;
+  font-size: 22px; font-weight: 700;
+  color: var(--primary);
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1;
+}
+.guide-carousel-btn:hover { background: var(--primary); color: #fff; }
+.guide-carousel-btn.prev { left: -10px; }
+.guide-carousel-btn.next { right: -10px; }
+.guide-carousel-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+@media (max-width: 640px) { .guide-carousel-btn { display: none; } }
+
+/* ============ GUIDE MODAL ============ */
+.guide-modal {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+  cursor: zoom-out;
+}
+.guide-modal.is-open { display: flex; animation: modalFadeIn 0.2s ease-out; }
+@keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.guide-modal-content {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 720px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 28px 32px;
+  cursor: auto;
+  position: relative;
+}
+.guide-modal-close {
+  position: absolute;
+  top: 12px; right: 14px;
+  width: 34px; height: 34px;
+  background: var(--bg-soft);
+  border: 0; border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink);
+  transition: all 0.2s;
+  font-family: var(--sans);
+}
+.guide-modal-close:hover { background: var(--primary); color: #fff; transform: rotate(90deg); }
+.guide-modal-industry {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+}
+.guide-modal-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  margin: 4px 0 10px;
+}
+.guide-modal-duration {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--primary-dark);
+  background: var(--bg-soft);
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+.guide-modal-img {
+  width: 100%;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+}
+.guide-modal-img img { width: 100%; height: auto; display: block; }
+.guide-modal-scenes {
+  list-style: none;
+  margin-bottom: 16px;
+  counter-reset: modalScene;
+}
+.guide-modal-scenes li {
+  padding: 8px 0 8px 32px;
+  position: relative;
+  font-size: 13px;
+  line-height: 1.6;
+  border-bottom: 1px dashed var(--rule);
+}
+.guide-modal-scenes li:last-child { border-bottom: 0; }
+.guide-modal-scenes li::before {
+  content: counter(modalScene);
+  counter-increment: modalScene;
+  position: absolute;
+  left: 0; top: 8px;
+  width: 22px; height: 22px;
+  background: var(--bg-warm);
+  color: var(--primary-dark);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+}
+.guide-modal-scenes .ts {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  background: var(--bg);
+  padding: 1px 6px;
+  border-radius: 3px;
+  color: var(--ink-soft);
+  margin-right: 6px;
+}
+.guide-modal-lines {
+  background: linear-gradient(135deg, #FFF4E6 0%, #FFE8DC 100%);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 12.5px;
+  line-height: 1.75;
+  border-left: 3px solid var(--primary);
+}
+.guide-modal-lines::before {
+  content: '🎙 セリフ例';
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--primary-dark);
+  margin-bottom: 4px;
+}
+.guide-modal-note {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  padding: 8px 12px;
+  background: #FFF8F2;
+  border-radius: 6px;
+  border-left: 2px solid var(--primary-soft);
+}
+
+/* ============ TRANSCRIPT in preview ============ */
+#doc-preview .transcript-block {
+  margin-top: 24px;
+  padding: 16px 18px;
+  background: #F0F4FF;
+  border-left: 3px solid var(--accent-blue);
+  border-radius: 0 8px 8px 0;
+}
+#doc-preview .transcript-heading {
+  font-size: 13pt;
+  color: var(--accent-blue);
+  margin: 0 0 8px;
+  padding: 0;
+  background: none;
+  border: 0;
+}
+#doc-preview .transcript-heading::before { content: '🎙 '; }
+#doc-preview .transcript-text {
+  font-size: 11pt;
+  line-height: 1.85;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+/* ============ NOTEBOOKLM 操作スクショ枠 ============ */
+.ss-section { margin: 18px 0 22px; }
+.ss-section-label {
+  font-family: var(--mono); font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.12em; color: var(--ink-mute);
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+  text-transform: uppercase;
+}
+.ss-section-label::before { content: '📸'; font-size: 13px; }
+.ss-section-label .ss-section-sub { font-weight: 500; opacity: 0.75; letter-spacing: 0.04em; text-transform: none; color: var(--ink-soft); }
+
+.ss-frame {
+  background: #fff; border: 1px solid var(--rule); border-radius: 14px;
+  overflow: hidden; box-shadow: 0 8px 26px rgba(42,37,32,0.08);
+  margin-bottom: 14px;
+}
+
+/* === Real photo screenshot variant === */
+.ss-frame-photo {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+@media (max-width: 640px) {
+  .ss-frame-photo { flex-direction: column; }
+}
+.ss-photo-wrap {
+  flex: 0 0 290px;
+  background: linear-gradient(180deg, #2A2520 0%, #1A1612 100%);
+  padding: 18px 14px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+@media (max-width: 640px) { .ss-photo-wrap { flex: 0 0 auto; padding: 18px; } }
+.ss-photo-wrap::before {
+  content: ''; position: absolute;
+  top: 8px; left: 50%; transform: translateX(-50%);
+  width: 56px; height: 5px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 3px;
+}
+.ss-photo {
+  max-width: 100%;
+  width: 240px;
+  border-radius: 18px;
+  border: 3px solid #1A1612;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.06);
+  display: block;
+  background: #fff;
+}
+@media (max-width: 640px) {
+  .ss-photo { width: 200px; }
+}
+
+/* === Tap-spot animation (positioned over image) === */
+.ss-photo-inner {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+.ss-tap-spot {
+  position: absolute;
+  top: var(--spot-y, 50%);
+  left: var(--spot-x, 50%);
+  width: 34px;
+  height: 34px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 3;
+}
+@media (max-width: 640px) {
+  .ss-tap-spot { width: 30px; height: 30px; }
+}
+/* Inner solid pulsing dot */
+.ss-tap-spot::before {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border-radius: 50%;
+  background: rgba(255, 111, 60, 0.85);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9), 0 0 12px rgba(255, 111, 60, 0.6);
+  animation: ss-tap-dot 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+/* Outer expanding ring */
+.ss-tap-spot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2.5px solid rgba(255, 111, 60, 0.95);
+  animation: ss-tap-ring 1.8s ease-out infinite;
+}
+@keyframes ss-tap-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(0.78); opacity: 0.85; }
+}
+@keyframes ss-tap-ring {
+  0%   { transform: scale(0.55); opacity: 1; border-width: 3px; }
+  100% { transform: scale(2.4);  opacity: 0; border-width: 1px; }
+}
+/* Finger pointer above the spot */
+.ss-tap-finger {
+  position: absolute;
+  top: calc(var(--spot-y, 50%) + 22px);
+  left: var(--spot-x, 50%);
+  font-size: 24px;
+  z-index: 4;
+  pointer-events: none;
+  transform: translate(-50%, 0);
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.45));
+  animation: ss-finger-tap 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes ss-finger-tap {
+  0%, 100% { transform: translate(-50%, 0) translateY(0)    rotate(-12deg); }
+  50%      { transform: translate(-50%, 0) translateY(-10px) rotate(-6deg); }
+}
+
+/* === Mockup variant (placeholder) === */
+.ss-chrome {
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 14px;
+  background: linear-gradient(180deg, #F4EFE3 0%, #EDE5D5 100%);
+  border-bottom: 1px solid var(--rule);
+}
+.ss-chrome-dots { display: flex; gap: 6px; flex-shrink: 0; }
+.ss-chrome-dots i { display: block; width: 11px; height: 11px; border-radius: 50%; }
+.ss-chrome-dots i:nth-child(1) { background: #FF6B5B; }
+.ss-chrome-dots i:nth-child(2) { background: #FFC850; }
+.ss-chrome-dots i:nth-child(3) { background: #44D261; }
+.ss-chrome-url {
+  flex: 1; font-family: var(--mono); font-size: 11px;
+  color: var(--ink-soft); background: #fff;
+  padding: 6px 14px; border-radius: 999px;
+  border: 1px solid var(--rule);
+  overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+.ss-chrome-tag {
+  font-family: var(--mono); font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.12em; color: var(--primary);
+  background: rgba(255,111,60,0.12);
+  padding: 4px 9px; border-radius: 4px; flex-shrink: 0;
+}
+.ss-mock {
+  position: relative;
+  background: linear-gradient(135deg, #FAF6ED 0%, #F4EEDF 100%);
+  padding: 16px;
+  min-height: 160px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.ss-mock-label { font-size: 11px; color: var(--ink-mute); font-weight: 600; }
+.ss-mock-card {
+  background: #fff; border: 1px solid var(--rule);
+  border-radius: 8px; padding: 10px 14px;
+  font-size: 11.5px; color: var(--ink-soft);
+}
+
+.ss-action {
+  align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 16px;
+  background: var(--primary); color: #fff;
+  border-radius: 8px;
+  font-size: 12.5px; font-weight: 700;
+  position: relative; z-index: 2;
+  font-family: var(--sans); white-space: nowrap;
+}
+.ss-action.is-secondary { background: #fff; color: var(--ink); border: 1.5px solid var(--ink); }
+.ss-action.is-blue { background: var(--accent-blue); }
+.ss-action::before, .ss-action::after {
+  content: ''; position: absolute; inset: -4px;
+  border-radius: 12px; border: 2.5px solid var(--primary);
+  pointer-events: none;
+  animation: ss-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.ss-action::after { animation-delay: 1s; }
+.ss-action.is-blue::before, .ss-action.is-blue::after { border-color: var(--accent-blue); }
+
+@keyframes ss-pulse {
+  0% { opacity: 0.9; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.45); }
+}
+
+.ss-three-dots {
+  position: absolute; top: 12px; right: 12px;
+  width: 26px; height: 26px;
+  background: #fff; border: 1px solid var(--rule);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; color: var(--ink-soft);
+  z-index: 2; font-size: 14px;
+}
+.ss-menu-pop {
+  position: absolute; top: 44px; right: 12px;
+  background: #fff; border: 1px solid var(--rule); border-radius: 8px;
+  padding: 6px; min-width: 160px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  display: flex; flex-direction: column; gap: 2px;
+  font-size: 11px; z-index: 4;
+}
+.ss-menu-item {
+  padding: 6px 10px; border-radius: 4px;
+  color: var(--ink-soft);
+}
+.ss-menu-item.is-target {
+  background: rgba(255,111,60,0.10);
+  color: var(--primary-dark); font-weight: 700;
+  position: relative;
+}
+.ss-menu-item.is-target::before,
+.ss-menu-item.is-target::after {
+  content: ''; position: absolute; inset: -2px;
+  border-radius: 6px; border: 2px solid var(--primary);
+  pointer-events: none;
+  animation: ss-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.ss-menu-item.is-target::after { animation-delay: 1s; }
+
+/* === Caption (shared) === */
+.ss-caption-wrap {
+  flex: 1;
+  padding: 16px 20px;
+  background: linear-gradient(90deg, #FFF8F2 0%, #FFF4E6 100%);
+  display: flex; flex-direction: column; gap: 10px;
+  justify-content: center;
+}
+.ss-caption {
+  display: flex; gap: 12px; align-items: flex-start;
+  font-size: 13px; line-height: 1.6;
+}
+.ss-caption-num {
+  flex-shrink: 0; width: 26px; height: 26px;
+  background: var(--primary); color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 11px; font-weight: 800;
+}
+.ss-caption-text strong { color: var(--ink); display: block; margin-bottom: 3px; font-size: 14px; }
+.ss-caption-text span { color: var(--ink-soft); font-size: 12.5px; display: block; }
+.ss-caption-text .ss-warn { color: var(--accent-warn); font-weight: 700; }
+.ss-caption-meta {
+  display: inline-flex; align-items: center; gap: 6px;
+  align-self: flex-start;
+  font-family: var(--mono); font-size: 10px;
+  color: var(--ink-mute);
+  padding: 4px 8px;
+  background: rgba(42,37,32,0.04);
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+.ss-caption-meta::before { content: '📍'; font-size: 11px; }
+
+/* Mockup-only caption (under .ss-mock) */
+.ss-frame:not(.ss-frame-photo) .ss-caption-wrap {
+  border-top: 1px solid var(--rule);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ss-action::before, .ss-action::after,
+  .ss-menu-item.is-target::before, .ss-menu-item.is-target::after { animation: none; }
+  .ss-action::before, .ss-menu-item.is-target::before { opacity: 0.5; transform: scale(1.08); }
+  .ss-action::after, .ss-menu-item.is-target::after { display: none; }
+  /* Tap animations: hold static state instead */
+  .ss-tap-spot::before, .ss-tap-spot::after, .ss-tap-finger { animation: none; }
+  .ss-tap-spot::after { opacity: 0.6; transform: scale(1.4); }
+  .ss-tap-finger { transform: translate(-50%, 0) translateY(-4px) rotate(-8deg); }
+}
+
+/* ============ BROWSER REQUIRED CALLOUT ============ */
+.browser-required {
+  background: linear-gradient(135deg, #FFF1EC 0%, #FFE8DC 100%);
+  border: 2px solid var(--accent-warn);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 0 0 24px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.browser-required-icon {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  background: var(--accent-warn);
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  font-weight: 800;
+}
+.browser-required-text strong {
+  display: block; font-size: 14.5px; color: var(--accent-warn);
+  margin-bottom: 4px;
+}
+.browser-required-text { font-size: 13px; color: var(--ink); line-height: 1.65; }
+.browser-required-text .nl-app-no { background: rgba(217,72,15,0.12); color: var(--accent-warn); font-weight: 700; padding: 1px 6px; border-radius: 3px; }
+.browser-required-text .nl-browser-yes { background: rgba(45,186,123,0.15); color: #1A8852; font-weight: 700; padding: 1px 6px; border-radius: 3px; }
+
+/* ============ FILE:// PROTOCOL WARNING ============ */
+.file-protocol-warning {
+  background: linear-gradient(135deg, #FFF1E0 0%, #FFE0CC 100%);
+  border: 2px solid var(--accent-warn);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 24px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.file-protocol-warning-icon {
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  background: var(--accent-warn);
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 800;
+}
+.file-protocol-warning-text {
+  font-size: 13.5px; line-height: 1.6;
+  color: var(--ink);
+  flex: 1;
+}
+.file-protocol-warning-text strong { color: var(--accent-warn); display: block; margin-bottom: 4px; font-size: 14.5px; }
+.file-protocol-warning-text code {
+  background: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--primary-dark);
+  border: 1px solid rgba(217,72,15,0.2);
+}
+.file-protocol-warning-text ol {
+  margin: 8px 0 4px;
+  padding-left: 22px;
+}
+.file-protocol-warning-text li { margin: 5px 0; }
+.file-protocol-warning-text .url-now {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-mute);
+  word-break: break-all;
+  display: block;
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: rgba(0,0,0,0.05);
+  border-radius: 4px;
+}
+
+/* ============ AUDIO DEBUG LOG PANEL ============ */
+.audio-debug-panel {
+  margin-top: 14px;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: #FAFAF8;
+  overflow: hidden;
+  display: none;
+}
+.audio-debug-panel.is-visible { display: block; }
+.audio-debug-panel.has-error { border-color: var(--accent-warn); }
+.audio-debug-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 14px;
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.audio-debug-panel.has-error .audio-debug-header { background: var(--accent-warn); }
+.audio-debug-title { display: flex; align-items: center; gap: 8px; }
+.audio-debug-title::before { content: '🔬'; font-size: 14px; }
+.audio-debug-actions { display: flex; gap: 6px; }
+.audio-debug-btn {
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.35);
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 10.5px;
+  font-family: var(--mono);
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+}
+.audio-debug-btn:hover { background: rgba(255,255,255,0.28); }
+.audio-debug-body {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  line-height: 1.55;
+  padding: 10px 14px;
+  max-height: 260px;
+  overflow-y: auto;
+  background: #FFFFFF;
+}
+.audio-debug-body:empty::before {
+  content: 'ログ待機中…';
+  color: var(--ink-mute);
+  font-style: italic;
+}
+.audio-log-line {
+  display: flex;
+  gap: 8px;
+  padding: 3px 0;
+  border-bottom: 1px dashed rgba(0,0,0,0.04);
+  align-items: flex-start;
+}
+.audio-log-line:last-child { border-bottom: none; }
+.audio-log-time {
+  color: var(--ink-mute);
+  flex-shrink: 0;
+  font-size: 10.5px;
+  padding-top: 1px;
+}
+.audio-log-level {
+  flex-shrink: 0;
+  width: 50px;
+  font-weight: 800;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 1px 5px;
+  border-radius: 3px;
+  text-align: center;
+}
+.audio-log-level.is-info  { background: rgba(59,91,219,0.10); color: var(--accent-blue); }
+.audio-log-level.is-warn  { background: rgba(255,180,0,0.18);  color: #B27500; }
+.audio-log-level.is-error { background: rgba(217,72,15,0.15);  color: var(--accent-warn); }
+.audio-log-level.is-ok    { background: rgba(45,186,123,0.15); color: #1A8852; }
+.audio-log-msg {
+  flex: 1;
+  color: var(--ink);
+  word-break: break-word;
+}
+.audio-debug-summary {
+  padding: 8px 14px;
+  background: var(--bg-soft);
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ink-soft);
+  letter-spacing: 0.03em;
+  display: none;
+}
+.audio-debug-summary.is-visible { display: block; }
+.audio-debug-summary code {
+  background: rgba(255,111,60,0.10);
+  color: var(--primary-dark);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+/* ============ FAQ & SHORTCUTS ============ */
+.faq-item {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 12px 0;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.faq-item:hover {
+  border-color: var(--primary-soft);
+  box-shadow: 0 4px 14px rgba(255,111,60,0.08);
+}
+.faq-q {
+  font-weight: 700; font-size: 14.5px;
+  display: flex; gap: 10px;
+  margin-bottom: 8px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.faq-q::before {
+  content: 'Q';
+  background: var(--accent-blue); color: #fff;
+  width: 22px; height: 22px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800;
+  flex-shrink: 0; font-family: var(--mono);
+}
+.faq-a {
+  font-size: 13.5px; color: var(--ink-soft);
+  padding-left: 32px; line-height: 1.7;
+}
+.faq-a strong { color: var(--ink); font-weight: 700; }
+.faq-a a {
+  color: var(--accent-blue);
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+.faq-a a:hover { border-color: var(--accent-blue); }
+
+.shortcut-steps { margin: 8px 0 4px; padding-left: 22px; font-size: 13px; color: var(--ink); }
+.shortcut-steps li { padding: 3px 0; }
+.shortcut-section-label {
+  display: block;
+  font-size: 12px; font-weight: 800;
+  letter-spacing: 0.08em; color: var(--ink);
+  margin: 14px 0 6px;
+}
+.shortcut-list { list-style: none; margin: 6px 0 4px; padding: 0; display: grid; gap: 6px; }
+.shortcut-list li {
+  background: linear-gradient(90deg, #F0F4FF 0%, #F7F9FF 100%);
+  border: 1px solid #C5D2F5;
+  border-left: 3px solid var(--accent-blue);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; flex-wrap: wrap;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.shortcut-list li:hover {
+  transform: translateX(2px);
+  box-shadow: 0 3px 10px rgba(59,91,219,0.15);
+}
+.shortcut-list .sc-label {
+  color: var(--ink); font-weight: 600;
+  flex: 1; min-width: 200px;
+}
+.shortcut-list .sc-label .sc-tag {
+  display: inline-block;
+  background: rgba(59,91,219,0.12);
+  color: var(--accent-blue);
+  font-family: var(--mono);
+  font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 3px;
+  margin-right: 6px; letter-spacing: 0.05em;
+}
+.shortcut-list .sc-link {
+  background: var(--accent-blue); color: #fff;
+  padding: 6px 14px; border-radius: 999px; text-decoration: none;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+  transition: background 0.2s, transform 0.15s;
+  display: inline-flex; align-items: center; gap: 4px;
+  border: 0;
+}
+.shortcut-list .sc-link:hover {
+  background: #2A4AC0; transform: scale(1.05);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-badge">CLIENT TOOL</div>
+    <h1 class="hero-title">タイミー<span class="accent">初回受け入れ用</span><br>マニュアル作成手順書</h1>
+    <p class="hero-sub">
+      スタッフが初日でも迷わないマニュアルを <strong>5ステップ</strong> で作成できます。<br>
+      仕事内容と動画をアップロードし、NotebookLM（ブラウザ版）でPDF化までを案内します。<strong>スマホだけで完結</strong>します。
+    </p>
+    <div class="hero-flow">
+      <span class="hero-flow-item"><span class="hero-flow-num">1</span>デザイン選択</span>
+      <span class="hero-flow-item"><span class="hero-flow-num">2</span>仕事内容入力</span>
+      <span class="hero-flow-item"><span class="hero-flow-num">3</span>動画アップ</span>
+      <span class="hero-flow-item"><span class="hero-flow-num">4</span>Word保存</span>
+      <span class="hero-flow-item"><span class="hero-flow-num">5</span>NotebookLM</span>
+    </div>
+  </header>
+
+  <!-- STEP 1: DESIGN -->
+  <section class="step-section" id="step1">
+    <div class="step-header">
+      <div class="step-num">STEP 01</div>
+      <h2 class="step-title">🎨 マニュアルの見た目を選ぶ</h2>
+      <p class="step-desc">完成形のテンプレートを4種類から選んでください。各カードの「完成サンプル」リンクで実物が見られます。</p>
+    </div>
+
+    <div class="design-guidance">
+      <span class="design-guidance-icon">💡</span>
+      <div>
+        <strong>迷ったら <span class="pill-c">⭐ おすすめ C</span> を選んでください。</strong>
+        Timeeブランドカラー（黄色）×実写でほとんどの現場に合います。<br>
+        印刷して掲示するなら白背景（B / D）、スマホ閲覧中心なら黄色（A / C）が見やすいです。
+      </div>
+    </div>
+
+    <div class="design-grid">
+
+      <label class="design-card" data-design="A">
+        <input type="radio" name="design" value="A">
+        <div class="design-card-img">
+          <img src="./image/design_a_yellow_illust.png" alt="Design A 黄色背景イラスト">
+        </div>
+        <div class="design-card-info">
+          <span class="design-letter">A</span>
+          <h3>黄色背景 × イラスト</h3>
+          <p>Timeeブランドカラーの黄色＋親しみやすいイラスト。初日でも緊張しない柔らかい印象。</p>
+          <span class="design-best-for">📌 飲食 / 小売 / 初心者が多い現場</span>
+          <div class="design-card-cta">
+            <a class="design-card-canva-link" href="https://canva.link/dx3mij1ivg5i5ks" target="_blank" rel="noopener" onclick="event.stopPropagation();">完成サンプルを見る</a>
+            <span class="design-card-tip">スマホ閲覧向き</span>
+          </div>
+        </div>
+      </label>
+
+      <label class="design-card" data-design="B">
+        <input type="radio" name="design" value="B">
+        <div class="design-card-img">
+          <img src="./image/design_b_white_illust.png" alt="Design B 白背景イラスト">
+        </div>
+        <div class="design-card-info">
+          <span class="design-letter">B</span>
+          <h3>白背景 × イラスト</h3>
+          <p>清潔感のある白＋イラスト。情報量が多くても読みやすく、印刷時に最適。</p>
+          <span class="design-best-for">🖨 製造 / 物流 / 工程の多い現場</span>
+          <div class="design-card-cta">
+            <a class="design-card-canva-link" href="https://canva.link/4zqzn86865nqvgx" target="_blank" rel="noopener" onclick="event.stopPropagation();">完成サンプルを見る</a>
+            <span class="design-card-tip">印刷向き</span>
+          </div>
+        </div>
+      </label>
+
+      <label class="design-card is-selected" data-design="C">
+        <input type="radio" name="design" value="C" checked>
+        <div class="design-card-img">
+          <img src="./image/design_c_yellow_photo.png" alt="Design C 黄色背景実写">
+        </div>
+        <div class="design-card-info">
+          <span class="design-letter">C</span>
+          <h3>黄色背景 × 実写</h3>
+          <p>黄色＋実写人物でTimeeらしさ最強。信頼感とブランドの一貫性を両立。</p>
+          <span class="design-best-for">🏆 標準採用パターン（迷ったらこれ）</span>
+          <div class="design-card-cta">
+            <a class="design-card-canva-link" href="https://canva.link/p7uxisybhuezhdu" target="_blank" rel="noopener" onclick="event.stopPropagation();">完成サンプルを見る</a>
+            <span class="design-card-tip">どこでもOK</span>
+          </div>
+        </div>
+      </label>
+
+      <label class="design-card" data-design="D">
+        <input type="radio" name="design" value="D">
+        <div class="design-card-img">
+          <img src="./image/design_d_white_photo.png" alt="Design D 白背景実写">
+        </div>
+        <div class="design-card-info">
+          <span class="design-letter">D</span>
+          <h3>白背景 × 実写</h3>
+          <p>白背景＋実写でプロフェッショナル感。落ち着いた印象で印刷時に最適。</p>
+          <span class="design-best-for">🩺 介護 / 医療 / フォーマルな現場</span>
+          <div class="design-card-cta">
+            <a class="design-card-canva-link" href="https://canva.link/n5zte1m1h9p0gtk" target="_blank" rel="noopener" onclick="event.stopPropagation();">完成サンプルを見る</a>
+            <span class="design-card-tip">印刷向き</span>
+          </div>
+        </div>
+      </label>
+
+    </div>
+    <div class="design-scroll-hint">スワイプして他のデザインも見る</div>
+  </section>
+
+  <!-- STEP 2: JOB CONTENT -->
+  <section class="step-section" id="step2">
+    <div class="step-header">
+      <div class="step-num">STEP 02</div>
+      <h2 class="step-title">📝 仕事内容を入力</h2>
+      <p class="step-desc">スタッフに伝えたい仕事内容を入力してください。Wordファイルにテキストとして埋め込まれます。</p>
+    </div>
+
+    <div class="job-form">
+      <div class="job-field-row">
+        <label>仕事タイトル <span class="req">必須</span></label>
+        <input type="text" id="job-title" placeholder="例：ホールスタッフ／品出し／ピッキング作業 など">
+      </div>
+      <div class="job-field-row">
+        <label>業種</label>
+        <select id="job-industry">
+          <option value="飲食">飲食</option>
+          <option value="小売・販売">小売・販売</option>
+          <option value="物流・倉庫">物流・倉庫</option>
+          <option value="軽作業">軽作業</option>
+          <option value="製造・工場">製造・工場</option>
+          <option value="介護・看護">介護・看護</option>
+          <option value="保育">保育</option>
+          <option value="ホテル・宿泊">ホテル・宿泊</option>
+          <option value="イベント・キャンペーン">イベント・キャンペーン</option>
+          <option value="清掃・ハウスキーピング">清掃・ハウスキーピング</option>
+          <option value="オフィスワーク">オフィスワーク</option>
+          <option value="配送・デリバリー">配送・デリバリー</option>
+          <option value="引越し">引越し</option>
+          <option value="警備">警備</option>
+          <option value="農業">農業</option>
+          <option value="その他">その他</option>
+        </select>
+      </div>
+      <div class="job-field-row">
+        <label>仕事内容 <span class="req">必須</span></label>
+        <textarea id="job-description" placeholder="例：&#10;・お客様の案内、注文取り&#10;・配膳、下膳&#10;・洗い場補助"></textarea>
+      </div>
+      <div class="job-field-row">
+        <label>注意事項</label>
+        <textarea id="job-notes" placeholder="例：&#10;・身だしなみ：髪は黒、長い場合は結ぶ&#10;・スマホは業務時間中は使用不可"></textarea>
+      </div>
+      <div class="job-field-row">
+        <label>持ち物・装備</label>
+        <input type="text" id="job-items" placeholder="例：エプロン、滑り止め靴">
+      </div>
+      <div class="job-field-row">
+        <label>待遇・時給</label>
+        <input type="text" id="job-pay" placeholder="例：時給1,200円、交通費支給、まかない付き">
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 3: VIDEO UPLOAD -->
+  <section class="step-section" id="step3">
+    <div class="step-header">
+      <div class="step-num">STEP 03</div>
+      <h2 class="step-title">🎥 業務動画をアップロード</h2>
+      <p class="step-desc">業務を1カットで撮影した動画をアップロードすると、自動的にスクリーンショットを抽出します。動画なしの場合はスキップしてSTEP 04へ。</p>
+    </div>
+
+    <!-- SHOOTING GUIDE CAROUSEL -->
+    <div class="shooting-guide-section">
+      <h3 class="shooting-guide-title">📐 業界別 1カット撮影ガイド（参考）</h3>
+      <p class="shooting-guide-desc">該当業界のカードをクリックすると、推奨アングル・タイムライン・セリフ例が表示されます。1カット撮影の参考にしてください。</p>
+      <div class="guide-carousel">
+        <button class="guide-carousel-btn prev" id="guidePrev" aria-label="前へ">‹</button>
+        <button class="guide-carousel-btn next" id="guideNext" aria-label="次へ">›</button>
+        <div class="guide-track" id="guideTrack">
+          <div class="guide-card" data-guide="logistics_picking">
+            <div class="guide-card-img"><img src="./image/guide_logistics_picking.png" alt="物流ピッキング" loading="lazy"></div>
+            <div class="guide-card-info">
+              <div class="guide-card-industry">LOGISTICS</div>
+              <div class="guide-card-title">物流｜出荷ピッキング</div>
+              <span class="guide-card-duration">90秒</span>
+            </div>
+          </div>
+          <div class="guide-card" data-guide="retail_stocking">
+            <div class="guide-card-img"><img src="./image/guide_retail_stocking.png" alt="小売品出し" loading="lazy"></div>
+            <div class="guide-card-info">
+              <div class="guide-card-industry">RETAIL</div>
+              <div class="guide-card-title">小売｜品出し</div>
+              <span class="guide-card-duration">120秒</span>
+            </div>
+          </div>
+          <div class="guide-card" data-guide="restaurant_order">
+            <div class="guide-card-img"><img src="./image/guide_restaurant_order.png" alt="飲食オーダー" loading="lazy"></div>
+            <div class="guide-card-info">
+              <div class="guide-card-industry">RESTAURANT</div>
+              <div class="guide-card-title">飲食｜案内〜オーダー取り</div>
+              <span class="guide-card-duration">120秒</span>
+            </div>
+          </div>
+          <div class="guide-card" data-guide="care_transfer">
+            <div class="guide-card-img"><img src="./image/guide_care_transfer.png" alt="介護移乗" loading="lazy"></div>
+            <div class="guide-card-info">
+              <div class="guide-card-industry">CARE</div>
+              <div class="guide-card-title">介護｜移乗介助</div>
+              <span class="guide-card-duration">90秒</span>
+            </div>
+          </div>
+          <div class="guide-card" data-guide="care_meal">
+            <div class="guide-card-img"><img src="./image/guide_care_meal.png" alt="介護食事" loading="lazy"></div>
+            <div class="guide-card-info">
+              <div class="guide-card-industry">CARE</div>
+              <div class="guide-card-title">介護｜食事介助</div>
+              <span class="guide-card-duration">90秒</span>
+            </div>
+          </div>
+          <div class="guide-card" data-guide="mfg_label">
+            <div class="guide-card-img"><img src="./image/guide_mfg_label.png" alt="製造ラベル貼り" loading="lazy"></div>
+            <div class="guide-card-info">
+              <div class="guide-card-industry">MANUFACTURING</div>
+              <div class="guide-card-title">製造｜ラベル貼り</div>
+              <span class="guide-card-duration">60秒</span>
+            </div>
+          </div>
+          <div class="guide-card" data-guide="mfg_packaging">
+            <div class="guide-card-img"><img src="./image/guide_mfg_packaging.png" alt="製造個包装" loading="lazy"></div>
+            <div class="guide-card-info">
+              <div class="guide-card-industry">MANUFACTURING</div>
+              <div class="guide-card-title">製造｜製品の個包装</div>
+              <span class="guide-card-duration">90秒</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-upload-wrapper">
+      <input type="file" id="video-file" accept="video/*">
+      <div class="video-upload-hint">スマートフォンで横向き撮影した動画を推奨（mp4/movなど）</div>
+    </div>
+
+    <div class="mode-block">
+      <div class="mode-block-title">📸 スクショ抽出モード</div>
+      <div class="mode-options">
+        <label class="mode-option">
+          <input type="radio" name="mode" value="auto-scene" checked>
+          <div>
+            <div class="mode-option-text">✨ 画面の切り替わりを自動検知</div>
+            <div class="mode-option-sub">シーンが変わった瞬間を自動抽出します（長い動画は数分かかります）。</div>
+          </div>
+        </label>
+        <label class="mode-option">
+          <input type="radio" name="mode" value="interval">
+          <div>
+            <div class="mode-option-text">⏱️ 等間隔で自動抽出</div>
+            <div class="mode-option-sub">指定した秒数ごとにスクショを抽出します。</div>
+          </div>
+        </label>
+        <label class="mode-option">
+          <input type="radio" name="mode" value="manual">
+          <div>
+            <div class="mode-option-text">✍️ 自分でタイムスタンプを指定</div>
+            <div class="mode-option-sub">抽出したい時間をテキストで入力します。</div>
+          </div>
+        </label>
+      </div>
+
+      <div id="setting-auto-scene" class="mode-detail" style="display:block;">
+        <div class="help-text">※動画を解析してシーンチェンジを自動検出します。長い動画ほど時間がかかります。</div>
+      </div>
+      <div id="setting-interval" class="mode-detail" style="display:none;">
+        <div class="help-text">何秒ごとに抽出するか指定してください。</div>
+        <input type="number" id="interval-sec" value="30" min="1"> 秒ごと
+      </div>
+      <div id="setting-manual" class="mode-detail" style="display:none;">
+        <div class="help-text">「時間 半角スペース 説明」の形式で1行ずつ入力（例：01:23 グラフ解説）</div>
+        <textarea id="input-data" placeholder="00:00 オープニング&#10;01:23 商品スキャン&#10;02:45 確定操作"></textarea>
+      </div>
+
+      <label class="embed-text-row">
+        <input type="checkbox" id="embed-text-chk">
+        <div class="embed-text-row-text">🖼️ 画像内にタイムスタンプを焼き付ける
+          <span class="embed-text-row-sub">スクショ下部に時間・説明文を合成します。</span>
+        </div>
+      </label>
+
+      <label class="embed-text-row">
+        <input type="checkbox" id="transcribe-chk" checked>
+        <div class="embed-text-row-text">🎙️ 動画の音声を文字に起こす（AI書き起こし）
+          <span class="embed-text-row-sub">Whisperで動画音声をテキスト化。<strong>各スクショの説明欄に該当時刻のセリフを自動挿入</strong>します。<strong>初回は約40MBのモデルダウンロード（30秒〜1分）</strong>。動画形式によってはFFmpeg.wasm（+30MB）を追加読み込み。</span>
+        </div>
+      </label>
+    </div>
+
+    <button class="btn btn-block" id="generate-btn">
+      📸 プレビューを生成する
+    </button>
+
+    <div class="status-area">
+      <div class="status-text" id="status"></div>
+      <progress id="progress-bar" max="100" value="0"></progress>
+    </div>
+
+    <!-- AUDIO DEBUG LOG -->
+    <div class="audio-debug-panel" id="audio-debug-panel">
+      <div class="audio-debug-header">
+        <span class="audio-debug-title">音声解析ログ</span>
+        <div class="audio-debug-actions">
+          <button class="audio-debug-btn" type="button" id="audio-debug-copy">コピー</button>
+          <button class="audio-debug-btn" type="button" id="audio-debug-clear">クリア</button>
+        </div>
+      </div>
+      <div class="audio-debug-body" id="audio-debug-body"></div>
+      <div class="audio-debug-summary" id="audio-debug-summary"></div>
+    </div>
+  </section>
+
+  <!-- STEP 4: PREVIEW & DOWNLOAD -->
+  <section class="step-section" id="step4">
+    <div class="step-header">
+      <div class="step-num">STEP 04</div>
+      <h2 class="step-title">📄 プレビュー＆Wordダウンロード</h2>
+      <p class="step-desc">下のプレビューを確認・編集してください。問題なければWordファイル(.docx)で保存します。</p>
+    </div>
+
+    <div class="preview-wrapper">
+      <div class="preview-toolbar">
+        <span class="preview-toolbar-label">📋 プレビュー（直接文字を編集できます）</span>
+      </div>
+      <div id="doc-preview" contenteditable="true"></div>
+    </div>
+
+    <div class="download-area">
+      <button class="btn btn-success" id="download-btn" disabled>
+        💾 Wordファイル(.docx)でダウンロード
+      </button>
+      <div class="download-area-hint">ダウンロード後、STEP 05 が表示されます。</div>
+    </div>
+  </section>
+
+  <!-- STEP 5: NotebookLM (hidden initially) -->
+  <section class="step-section" id="step5">
+    <div class="step-header">
+      <div class="step-num">STEP 05</div>
+      <h2 class="step-title">🤖 NotebookLMでマニュアルを完成させる</h2>
+      <p class="step-desc">ダウンロードしたWordをNotebookLMに読み込ませ、選んだデザインでスライドを生成→PDF保存します。</p>
+    </div>
+
+    <div class="celebration-banner">
+      Wordダウンロード完了！あと少しでマニュアルが完成します。下の手順に従って進めてください。
+    </div>
+
+    <!-- BROWSER REQUIRED CALLOUT -->
+    <div class="browser-required">
+      <div class="browser-required-icon">⚠</div>
+      <div class="browser-required-text">
+        <strong>NotebookLMは「ブラウザ（Chrome／Safari等）」で開いてください</strong>
+        <span class="nl-app-no">NotebookLMアプリ</span>からだとPDF保存ができません。<br>
+        スマホのホーム画面でアプリではなく、<span class="nl-browser-yes">ブラウザ</span>で <code style="background:#fff; padding:1px 6px; border-radius:3px; font-size:12px;">notebooklm.google.com</code> にアクセスしてください。
+      </div>
+    </div>
+
+    <!-- PHASE 1 -->
+    <div class="phase-card">
+      <div class="phase-num">PHASE 1 — SOURCE</div>
+      <h3 class="phase-title">NotebookLMにソースを投入する</h3>
+      <ol class="phase-steps">
+        <li>
+          ブラウザでNotebookLMを開く
+          <div style="margin-top:8px;"><a class="btn-link-out" href="https://notebooklm.google.com/" target="_blank" rel="noopener">NotebookLMを開く（ブラウザ版）</a></div>
+        </li>
+        <li>
+          画面上部の <span class="kbd">+ ノートブックを作成</span> をタップ
+          <div class="ss-section">
+            <div class="ss-section-label">操作スクリーンショット <span class="ss-section-sub">— 新規ノート作成後の画面</span></div>
+            <div class="ss-frame ss-frame-photo">
+              <div class="ss-photo-wrap">
+                <div class="ss-photo-inner" style="--spot-x: 50%; --spot-y: 21%;">
+                  <img class="ss-photo" src="./image/notebooklm/p1_s02_new_notebook.png" alt="Untitled notebook 空の状態">
+                  <div class="ss-tap-spot"></div>
+                  <div class="ss-tap-finger">👆</div>
+                </div>
+              </div>
+              <div class="ss-caption-wrap">
+                <div class="ss-caption">
+                  <div class="ss-caption-num">1</div>
+                  <div class="ss-caption-text">
+                    <strong>「Untitled notebook」が開く</strong>
+                    <span>ソース・チャット・Studioの3タブが並ぶ画面が出ればOK。</span>
+                  </div>
+                </div>
+                <span class="ss-caption-meta">画面位置：上部「+ ノートブックを作成」</span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <span class="kbd">+ ソースを追加</span> をタップ →「ファイルをアップロード」を選び、<strong>先ほどダウンロードしたWordファイル(.docx)</strong> をアップロード
+          <div class="ss-section">
+            <div class="ss-section-label">操作スクリーンショット <span class="ss-section-sub">— ソース追加モーダル</span></div>
+            <div class="ss-frame ss-frame-photo">
+              <div class="ss-photo-wrap">
+                <div class="ss-photo-inner" style="--spot-x: 50%; --spot-y: 65%;">
+                  <img class="ss-photo" src="./image/notebooklm/p1_s03_add_source.png" alt="ソースを追加モーダル">
+                  <div class="ss-tap-spot"></div>
+                  <div class="ss-tap-finger">👆</div>
+                </div>
+              </div>
+              <div class="ss-caption-wrap">
+                <div class="ss-caption">
+                  <div class="ss-caption-num">2</div>
+                  <div class="ss-caption-text">
+                    <strong>「ファイルをアップロード」をタップして.docxを選択</strong>
+                    <span>PDF・画像・音声などにも対応していますが、今回はWordファイルを選びます。</span>
+                  </div>
+                </div>
+                <span class="ss-caption-meta">画面位置：下半分のモーダル内</span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          ローディングが消えるまで <strong>1分ほど待つ</strong>（NotebookLMが内容を読み込みます）
+          <div class="ss-section">
+            <div class="ss-section-label">操作スクリーンショット <span class="ss-section-sub">— 読み込み完了の確認</span></div>
+            <div class="ss-frame ss-frame-photo">
+              <div class="ss-photo-wrap">
+                <div class="ss-photo-inner" style="--spot-x: 50%; --spot-y: 42%;">
+                  <img class="ss-photo" src="./image/notebooklm/p1_s04_source_uploaded.png" alt="ソース読み込み完了">
+                  <div class="ss-tap-spot"></div>
+                </div>
+              </div>
+              <div class="ss-caption-wrap">
+                <div class="ss-caption">
+                  <div class="ss-caption-num">3</div>
+                  <div class="ss-caption-text">
+                    <strong>ソース一覧にWordファイル名が表示されればOK</strong>
+                    <span>右側にチェックマーク（✓）が付いた状態で読み込まれます。</span>
+                  </div>
+                </div>
+                <span class="ss-caption-meta">画面位置：ソースタブの一覧</span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase-card">
+      <div class="phase-num">PHASE 2 — TEXT</div>
+      <h3 class="phase-title">マニュアル本文を生成する</h3>
+      <ol class="phase-steps">
+        <li>
+          画面上部の <strong>「チャット」タブ</strong> に切り替え → 下の <strong>マニュアルプロンプト</strong> をコピーして、チャット欄に貼り付け → 送信
+          <div class="ss-section">
+            <div class="ss-section-label">操作スクリーンショット <span class="ss-section-sub">— チャットタブでプロンプト送信</span></div>
+            <div class="ss-frame ss-frame-photo">
+              <div class="ss-photo-wrap">
+                <div class="ss-photo-inner" style="--spot-x: 86%; --spot-y: 88%;">
+                  <img class="ss-photo" src="./image/notebooklm/p2_s01_send_prompt.png" alt="チャットタブでプロンプト送信">
+                  <div class="ss-tap-spot"></div>
+                  <div class="ss-tap-finger">👆</div>
+                </div>
+              </div>
+              <div class="ss-caption-wrap">
+                <div class="ss-caption">
+                  <div class="ss-caption-num">1</div>
+                  <div class="ss-caption-text">
+                    <strong>チャット欄にプロンプトを貼り付けて送信</strong>
+                    <span>マニュアル本文（15ページ分）がテキストで返ってきます。</span>
+                  </div>
+                </div>
+                <span class="ss-caption-meta">画面位置：チャットタブの最下部の入力欄</span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="prompt-card">
+            <div class="prompt-card-header">
+              <span class="prompt-card-label">🪄 MANUAL PROMPT</span>
+              <button class="prompt-card-copy" data-target="manualPrompt">📋 コピー</button>
+            </div>
+            <div class="prompt-card-content" id="manualPrompt">タイミーの「初回稼働用マニュアル」を15pで作成します。ソースを参照して初回稼働する人が安心して働ける詳細プロンプトを書き出してください。解説や挨拶、ツールへの導入文などは一切不要です。『プロンプトの内容そのもの』だけをコピーしやすいように直接出力してください。このプロンプトについての解説も不要です。</div>
+          </div>
+        </li>
+        <li>
+          回答の下にある <strong>📌（ピン）アイコン「メモに保存」</strong> をタップ
+          <div class="ss-section">
+            <div class="ss-section-label">操作スクリーンショット <span class="ss-section-sub">— メモに保存</span></div>
+            <div class="ss-frame ss-frame-photo">
+              <div class="ss-photo-wrap">
+                <div class="ss-photo-inner" style="--spot-x: 9%; --spot-y: 62%;">
+                  <img class="ss-photo" src="./image/notebooklm/p2_s03_save_memo.png" alt="回答にメモに保存ピン">
+                  <div class="ss-tap-spot"></div>
+                  <div class="ss-tap-finger">👆</div>
+                </div>
+              </div>
+              <div class="ss-caption-wrap">
+                <div class="ss-caption">
+                  <div class="ss-caption-num">2</div>
+                  <div class="ss-caption-text">
+                    <strong>回答の下にある左端の📌をタップ</strong>
+                    <span>同じ列にある👍👎ではないので注意。📌は「ピン留め＝メモに保存」の意味です。</span>
+                  </div>
+                </div>
+                <span class="ss-caption-meta">画面位置：チャット回答の直下のアイコン列</span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          保存されたメモを開き、<strong>右上の <span class="kbd">︙</span>（縦三点メニュー）</strong> →「ソースに変換」をタップ
+          <div class="ss-section">
+            <div class="ss-section-label">操作スクリーンショット <span class="ss-section-sub">— ︙→ ソースに変換</span></div>
+            <div class="ss-frame ss-frame-photo">
+              <div class="ss-photo-wrap">
+                <div class="ss-photo-inner" style="--spot-x: 52%; --spot-y: 36%;">
+                  <img class="ss-photo" src="./image/notebooklm/p2_s04b_menu_open.png" alt="メモのメニューを開いた状態">
+                  <div class="ss-tap-spot"></div>
+                  <div class="ss-tap-finger">👆</div>
+                </div>
+              </div>
+              <div class="ss-caption-wrap">
+                <div class="ss-caption">
+                  <div class="ss-caption-num">3</div>
+                  <div class="ss-caption-text">
+                    <strong>メモ右端の ︙ をタップ →「ソースに変換」</strong>
+                    <span>保存したメモがソース一覧に追加されます。</span>
+                  </div>
+                </div>
+                <span class="ss-caption-meta">画面位置：Studioタブのメモ一覧</span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          ソースタブに戻り、<strong>変換したメモだけにチェック</strong>。元のWordのチェックは <strong>外す</strong>
+          <div class="warn-note"><strong>⚠ ここを間違えると別物が生成されます。</strong>「変換したメモ」だけにチェック → 他のソースは外す、を必ず確認。</div>
+          <div class="ss-section">
+            <div class="ss-section-label">操作スクリーンショット <span class="ss-section-sub">— ソース一覧でチェック切替</span></div>
+            <div class="ss-frame ss-frame-photo">
+              <div class="ss-photo-wrap">
+                <div class="ss-photo-inner" style="--spot-x: 88%; --spot-y: 42%;">
+                  <img class="ss-photo" src="./image/notebooklm/p1_s04_source_uploaded.png" alt="ソース一覧チェック">
+                  <div class="ss-tap-spot"></div>
+                  <div class="ss-tap-finger">👆</div>
+                </div>
+              </div>
+              <div class="ss-caption-wrap">
+                <div class="ss-caption">
+                  <div class="ss-caption-num">4</div>
+                  <div class="ss-caption-text">
+                    <strong>「変換したメモ」だけにチェック</strong>
+                    <span class="ss-warn">⚠️ 元のWord(.docx)のチェックを外し、変換メモだけONにします。</span>
+                  </div>
+                </div>
+                <span class="ss-caption-meta">画面位置：ソースタブの一覧</span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase-card">
+      <div class="phase-num">PHASE 3 — DESIGN & PDF</div>
+      <h3 class="phase-title">
+        デザインを適用してPDF化する
+        <span style="margin-left:10px;">— 選択中：<span class="selected-design-pill" id="selectedDesignPill"><span class="pill-letter" id="selectedDesignLetter">C</span><span id="selectedDesignName">黄色背景 × 実写</span></span></span>
+      </h3>
+      <ol class="phase-steps">
+        <li>
+          画面上部の <strong>「Studio」タブ</strong> に切り替え →「スライド資料」をタップ
+          <div class="ss-section">
+            <div class="ss-section-label">操作スクリーンショット <span class="ss-section-sub">— Studioタブでスライド資料を選ぶ</span></div>
+            <div class="ss-frame ss-frame-photo">
+              <div class="ss-photo-wrap">
+                <div class="ss-photo-inner" style="--spot-x: 75%; --spot-y: 22%;">
+                  <img class="ss-photo" src="./image/notebooklm/p3_s01_studio_tab.png" alt="Studioタブ">
+                  <div class="ss-tap-spot"></div>
+                  <div class="ss-tap-finger">👆</div>
+                </div>
+              </div>
+              <div class="ss-caption-wrap">
+                <div class="ss-caption">
+                  <div class="ss-caption-num">1</div>
+                  <div class="ss-caption-text">
+                    <strong>右上の「Studio」タブ → 「スライド資料（ベータ版）」をタップ</strong>
+                    <span>音声解説・マインドマップなど他のオプションは無視して、スライド資料を選びます。</span>
+                  </div>
+                </div>
+                <span class="ss-caption-meta">画面位置：Studioタブ内</span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          開いた「スライド資料をカスタマイズ」画面で、<strong>下の <strong>デザインプロンプト</strong> をコピーして、説明欄に貼り付け</strong> → <span class="kbd">生成</span> をタップ
+          <div class="ss-section">
+            <div class="ss-section-label">操作スクリーンショット <span class="ss-section-sub">— カスタマイズ画面で生成</span></div>
+            <div class="ss-frame ss-frame-photo">
+              <div class="ss-photo-wrap">
+                <div class="ss-photo-inner" style="--spot-x: 80%; --spot-y: 83%;">
+                  <img class="ss-photo" src="./image/notebooklm/p3_s02b_customize_prompt.png" alt="カスタマイズ画面プロンプト貼り付け">
+                  <div class="ss-tap-spot"></div>
+                  <div class="ss-tap-finger">👆</div>
+                </div>
+              </div>
+              <div class="ss-caption-wrap">
+                <div class="ss-caption">
+                  <div class="ss-caption-num">2</div>
+                  <div class="ss-caption-text">
+                    <strong>「作成するスライドについて説明してください」欄にデザインプロンプトを貼り付け → 「生成」</strong>
+                    <span>言語は「日本語」、長さは「デフォルト」のままでOK。</span>
+                  </div>
+                </div>
+                <span class="ss-caption-meta">画面位置：カスタマイズダイアログ下部</span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="prompt-card">
+            <div class="prompt-card-header">
+              <span class="prompt-card-label">🎨 DESIGN PROMPT — <span id="designPromptLetter">C</span></span>
+              <button class="prompt-card-copy" data-target="designPrompt">📋 コピー</button>
+            </div>
+            <div class="prompt-card-content" id="designPrompt"></div>
+          </div>
+        </li>
+        <li>
+          生成完了後、内容をチェック。修正したい場合は <span class="kbd">変更</span> から <strong>まとめて</strong> 指示（1スライドずつ修正すると都度時間がかかります）
+          <div class="ss-section">
+            <div class="ss-section-label">操作スクリーンショット <span class="ss-section-sub">— 修正指示</span></div>
+            <div class="ss-frame ss-frame-photo">
+              <div class="ss-photo-wrap">
+                <div class="ss-photo-inner" style="--spot-x: 33%; --spot-y: 4%;">
+                  <img class="ss-photo" src="./image/notebooklm/p3_s04_change_button.png" alt="変更ボタンで修正">
+                  <div class="ss-tap-spot"></div>
+                  <div class="ss-tap-finger">👆</div>
+                </div>
+              </div>
+              <div class="ss-caption-wrap">
+                <div class="ss-caption">
+                  <div class="ss-caption-num">3</div>
+                  <div class="ss-caption-text">
+                    <strong>「変更」をタップ → 修正点を1度でまとめて指示</strong>
+                    <span>例：「3枚目の画像を差し替え、5枚目を敬語に、7枚目の警告アイコンを大きく」など具体的に。</span>
+                  </div>
+                </div>
+                <span class="ss-caption-meta">画面位置：スライド画面の上部</span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          右上の <span class="kbd">︙</span> → <strong>「PDFでダウンロード」</strong> で完成 🎉
+          <div class="ss-section">
+            <div class="ss-section-label">操作スクリーンショット <span class="ss-section-sub">— PDFダウンロード（ゴール！）</span></div>
+            <div class="ss-frame ss-frame-photo">
+              <div class="ss-photo-wrap">
+                <div class="ss-photo-inner" style="--spot-x: 30%; --spot-y: 17%;">
+                  <img class="ss-photo" src="./image/notebooklm/p3_s05_download_menu.png" alt="PDFダウンロードメニュー">
+                  <div class="ss-tap-spot"></div>
+                  <div class="ss-tap-finger">👆</div>
+                </div>
+              </div>
+              <div class="ss-caption-wrap">
+                <div class="ss-caption">
+                  <div class="ss-caption-num">4</div>
+                  <div class="ss-caption-text">
+                    <strong>スライド画面の上部 ⋯ →「PDFドキュメント（.pdf）をダウンロード」</strong>
+                    <span class="ss-warn">⚠️ アプリだとこのメニューが出ません。必ずブラウザで開いてください。</span>
+                  </div>
+                </div>
+                <span class="ss-caption-meta">画面位置：スライド画面右上の ⋯</span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+  </section>
+
+  <!-- FAQ + SHORTCUTS -->
+  <section class="step-section" id="faq">
+    <div class="step-header">
+      <div class="step-num">FAQ</div>
+      <h2 class="step-title">⚠️ よくあるつまずき</h2>
+      <p class="step-desc">マニュアル作成中に詰まりやすいポイントをまとめています。</p>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">NotebookLMでPDFダウンロードのボタンが見当たらない</div>
+      <div class="faq-a"><strong>NotebookLMアプリ</strong> から開いていませんか？アプリではPDF保存ができません。<strong>ブラウザ（Chrome／Safari等）</strong> で <code style="background:var(--bg-soft); padding:1px 6px; border-radius:3px; font-size:12px;">notebooklm.google.com</code> にアクセスして同じノートを開くと、PDFダウンロードのメニューが表示されます。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">「メモに保存」のボタンが見つからない</div>
+      <div class="faq-a">スマホ画面では <strong>📌（ピン）アイコン</strong> として表示されています。回答テキストの下にある左端のアイコンです。👍・👎の絵文字とは別のアイコンなので注意してください。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">スライドを生成したら別物になってしまった</div>
+      <div class="faq-a">ソース一覧で <strong>「変換したメモ」だけにチェック</strong> が入っているか確認してください。元のWord(.docx)のチェックが残っていると、両方の情報をミックスした別物が生成されます。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">生成されたマニュアルがスカスカ</div>
+      <div class="faq-a">STEP 02の <strong>仕事内容</strong> が短すぎる可能性があります。「お客様の案内、注文取り…」だけでなく、注意事項・持ち物・装備・身だしなみルールなども含めると精度が上がります。STEP 03で <strong>業務動画</strong> をアップロードするのも効果的です。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">黄色背景にならない／意図したデザインにならない</div>
+      <div class="faq-a">STEP 01のデザインで選んだプロンプトが、NotebookLMの「スライド資料をカスタマイズ」画面に <strong>そのまま貼り付けされているか</strong> 確認してください。改行や文字が抜けると精度が落ちます。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">撮影が難しい現場の場合</div>
+      <div class="faq-a">動画が撮れない場合は、<strong>作業内容をヒアリングしてGoogle Docsにまとめ</strong>、それをWordの代わりにNotebookLMへアップロードできます。ヒアリングのまとめ方がわからない場合は、<a href="https://gemini.google.com/gem/1zANA5Nj5PzS1LHEFQ4_OzSkviVgxya8i?usp=sharing" target="_blank" rel="noopener">作業マニュアルGem</a> に質問しながら回答するだけでGoogle Docsが作れます。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">作業マニュアルGemを開くとログイン画面が出る</div>
+      <div class="faq-a"><strong>⚠️ 一度だけGoogleアカウントでのログインが必要</strong>です。初回アクセス時にGoogleアカウントでログインしてください。一度認証すれば、以降は自動的にGemが開きます。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">デザインバリエーション、どれを選べばいい？</div>
+      <div class="faq-a">用途で先に絞る：<strong>印刷して掲示するなら白背景（B / D）、スマホ閲覧中心なら黄色（A / C）</strong>。さらに迷ったら <strong>C（黄色背景×実写）</strong> が標準。介護・医療など落ち着いた印象が必要なら D（白背景×実写）。初心者スタッフが多い飲食・小売は A（黄色×イラスト）が好相性です。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">プロンプトをクリップボードへ素早く呼び出したい（iPhone・Mac対応）</div>
+      <div class="faq-a">
+        iPhoneまたはMacの「ショートカット」アプリを使うと、各プロンプトを <strong>2ステップでクリップボードにコピー</strong> できます。
+
+        <span class="shortcut-section-label">📥 初回セットアップ</span>
+        下記リンクから、使いたいショートカットを追加（リンク先で「ショートカットを追加」をタップ）。一度追加すれば次回以降は不要です。
+
+        <span class="shortcut-section-label">🚀 使い方（iPhone）</span>
+        <ol class="shortcut-steps">
+          <li>ホーム画面を下にスワイプして検索を開く</li>
+          <li>ショートカット名（例：「マニュアルA」）を入力 → タップ → 自動でクリップボードへコピー</li>
+          <li>NotebookLM等で長押し → <strong>ペースト</strong></li>
+        </ol>
+
+        <span class="shortcut-section-label">🔗 ショートカット一覧</span>
+        <ul class="shortcut-list">
+          <li>
+            <span class="sc-label"><span class="sc-tag">PROMPT</span>マニュアルプロンプト（NotebookLMのチャットに入れる）</span>
+            <a class="sc-link" href="https://www.icloud.com/shortcuts/06b3dec49fe74ac8800a1cb279123001" target="_blank" rel="noopener">＋ 追加</a>
+          </li>
+          <li>
+            <span class="sc-label"><span class="sc-tag">DESIGN A</span>マニュアルA（黄色背景・イラスト）</span>
+            <a class="sc-link" href="https://www.icloud.com/shortcuts/6b02a0ee0be64a0994156189bdbd4c5a" target="_blank" rel="noopener">＋ 追加</a>
+          </li>
+          <li>
+            <span class="sc-label"><span class="sc-tag">DESIGN B</span>マニュアルB（白背景・イラスト）</span>
+            <a class="sc-link" href="https://www.icloud.com/shortcuts/5eaeeae0cd8b4085a5376cc86c24b8ee" target="_blank" rel="noopener">＋ 追加</a>
+          </li>
+          <li>
+            <span class="sc-label"><span class="sc-tag">DESIGN C</span>マニュアルC（黄色背景・実写）</span>
+            <a class="sc-link" href="https://www.icloud.com/shortcuts/b638add610e3406dad0ac123b1750f3b" target="_blank" rel="noopener">＋ 追加</a>
+          </li>
+          <li>
+            <span class="sc-label"><span class="sc-tag">DESIGN D</span>マニュアルD（白背景・実写）</span>
+            <a class="sc-link" href="https://www.icloud.com/shortcuts/971b23f63d0a4fb3a1bf6304d29aea34" target="_blank" rel="noopener">＋ 追加</a>
+          </li>
+        </ul>
+        <p style="margin-top:10px; font-size:11.5px; color:var(--ink-mute);">※ iPhone・Mac標準の「ショートカット」アプリが必要です（iCloud Shortcuts）。</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    タイミー初回受け入れ用マニュアル作成手順書｜運営：株式会社タイミー
+  </footer>
+
+</div>
+
+<!-- GUIDE MODAL -->
+<div class="guide-modal" id="guideModal">
+  <div class="guide-modal-content" onclick="event.stopPropagation()">
+    <button class="guide-modal-close" type="button" aria-label="閉じる">×</button>
+    <div id="guideModalBody"></div>
+  </div>
+</div>
+
+<script>
+// =================================================
+// PROMPT CONSTANTS
+// =================================================
+const DESIGN_PROMPTS = {
+  A: `【カラー指定（厳守）】
+・背景カラーは #FFD700（RGB: 255,215,0）を厳密に使用し、RGB値の変更・明度調整・彩度調整・透過・グラデーション・影・減光処理を一切行わず、必ず単色ベタ塗りで完全一致させること。
+・文字色は #212121(本文・見出し)、#FFFFFF(暗色背景上のみ)。
+・アクセントカラーは #007AFF、警告・注意喚起カラーは #FF3B30。
+・視認性確保のため、黄背景に白文字等の低コントラスト組み合わせは避けること。
+
+【デザイン】
+・黄色・黒・白を基調とする。
+・簡潔な図解とイラストを使用し、情報を整理して見やすく配置する。
+
+【トーン＆マナー】
+・初めての方でも安心できる優しい伴走型のトーン(煽る表現は避ける)。
+
+【強調表示】
+・注意喚起には赤色(#FF3B30)や目立つアイコンを使用してメリハリをつける。
+
+【画像生成(スタッフイラスト)】
+・実写風画像は使用せず、必ず「淡い水色のポロシャツとチノパン」を着たスタッフのフラットでやさしいタッチのイラスト(親しみやすいキャラクター風)を生成して挿入する。
+・線は均一でやわらかく、彩度は中程度に抑え、黄色背景と調和する配色にすること。
+・写真調・3D・リアル系の描写は禁止。
+・黄色くて丸いキャラクターは登場させないこと。
+
+【コピー防止用の透かし(全スライド共通)】
+・全スライドの背景全面に「Timee」という文字を半透明の白(#FFFFFF)で透かしとして配置すること。
+・配置角度は左下から右上に向けて約-30度の斜め配置。
+・タイル状(格子状)に等間隔で繰り返し配置し、スライド全面を覆うこと。
+・1文字あたりのフォントサイズは小さめ(目安: 18〜24pt程度)、不透明度は薄め(目安: 10〜15%)に設定し、本文の可読性を妨げないこと。
+・フォントはサンセリフ体(Helvetica、Arial、Noto Sans等)を使用。
+・透かしはコンテンツ・図解・イラストの背面に配置し、前面要素の視認性を最優先すること。`,
+
+  B: `【カラー指定（厳守）】
+・背景カラーは #FFFFFF（RGB: 255,255,255）を厳密に使用し、RGB値の変更・明度調整・彩度調整・透過・グラデーション・影・減光処理を一切行わず、必ず単色ベタ塗りで完全一致させること。
+・文字色は #212121（本文・見出し）を基本とし、暗色背景上でのみ #FFFFFF を使用する。
+・アクセントカラーは #007AFF、警告・注意喚起カラーは #FF3B30。
+・視認性確保のため、白背景に白文字や淡色文字等の低コントラスト組み合わせは避けること。
+
+【デザイン】
+・白・黒・差し色（#007AFF / #FF3B30）を基調とする。
+・簡潔な図解とイラストを使用し、情報を整理して見やすく配置する。
+
+【トーン＆マナー】
+・初めての方でも安心できる優しい伴走型のトーン（煽る表現は避ける）。
+
+【強調表示】
+・注意喚起には赤色（#FF3B30）や目立つアイコンを使用してメリハリをつける。
+
+【画像生成（スタッフイラスト）】
+・実写風画像は使用せず、必ず「淡い水色のポロシャツとチノパン」を着たスタッフのフラットでやさしいタッチのイラスト（親しみやすいキャラクター風）を生成して挿入する。
+・線は均一でやわらかく、彩度は中程度に抑え、白背景と調和する配色にすること。
+・写真調・3D・リアル系の描写は禁止。
+・黄色くて丸いキャラクターは登場させないこと。
+
+【コピー防止用の透かし（全スライド共通）】
+・全スライドの背景全面に「Timee」という文字を、ごく薄いグレー（目安: #E5E5E5 〜 #EEEEEE 相当、または黒 #000000 を不透明度 4〜6% に設定）で透かしとして配置すること。 ※白背景のため、純白の透かしは視認できないので使用しない。
+・配置角度は左下から右上に向けて約 -30 度の斜め配置。
+・タイル状（格子状）に等間隔で繰り返し配置し、スライド全面を覆うこと。
+・1文字あたりのフォントサイズは小さめ（目安: 18〜24pt 程度）、不透明度は前回より薄め（目安: 4〜6%）に設定し、本文の可読性を一切妨げないこと。
+・フォントはサンセリフ体（Helvetica、Arial、Noto Sans 等）を使用。
+・透かしはコンテンツ・図解・イラストの背面に配置し、前面要素の視認性を最優先すること。`,
+
+  C: `【カラー指定（厳守）】
+・背景カラーは #FFD700（RGB: 255,215,0）を厳密に使用し、RGB値の変更・明度調整・彩度調整・透過・グラデーション・影・減光処理を一切行わず、必ず単色ベタ塗りで完全一致させること。
+・文字色は #212121(本文・見出し)、#FFFFFF(暗色背景上のみ)。
+・アクセントカラーは #007AFF、警告・注意喚起カラーは #FF3B30。
+・視認性確保のため、黄背景に白文字等の低コントラスト組み合わせは避けること。
+【デザイン】
+・黄色・黒・白を基調とする。
+・簡潔な図解を使用し、情報を整理して見やすく配置する。
+・余白を十分に取り、清潔感のあるレイアウトにすること。
+【トーン＆マナー】
+・初めての方でも安心できる優しい伴走型のトーン(煽る表現は避ける)。
+【強調表示】
+・注意喚起には赤色(#FF3B30)や目立つアイコンを使用してメリハリをつける。
+【使用する画像(スタッフ実写画像)】
+・イラストは使用しないこと。
+・原則として、ソース(アップロード資料)に含まれている実写写真をそのまま使用すること。
+・ソース内の写真の中から、内容に最も適した場面(作業中・案内中・説明中など)を選定して挿入する。
+・写真のトリミングや配置調整は可だが、人物の差し替え・合成・加工(色味の大幅変更、フィルター追加、AIによる修正等)は行わないこと。
+・ソースに該当する写真が含まれていない場合に限り、AIによる実写風画像を新規生成して挿入してよい。
+・新規生成する場合は、必ず「淡い水色のポロシャツとチノパン」を着たスタッフのリアルな実写風(写真的な)画像とすること。
+・性別・年齢は内容に合わせて自然に設定し、表情は柔らかく親しみやすい印象にすること。
+・スタッフが実際に作業している様子・案内している様子・説明している様子など、内容に即した自然なシチュエーションで人物を登場させること。
+・背景は白または淡いグレーのシンプルな環境とし、被写体(スタッフ)が主役として際立つようにすること(黄色背景のスライド上に配置する際は、写真自体の背景は白〜淡グレーを維持し、写真の周囲に十分な余白を確保して視認性を担保すること)。
+・照明は自然光のような柔らかい光を意識し、明るくクリアな写真品質にすること。
+・3Dレンダリング調・CG調・アニメ調・過度な加工は禁止。あくまで自然な実写写真のクオリティを保つこと。
+・黄色くて丸いキャラクターは登場させないこと。
+【コピー防止用の透かし(全スライド共通)】
+・全スライドの背景全面に「Timee」という文字を半透明の白(#FFFFFF)で透かしとして配置すること。
+・配置角度は左下から右上に向けて約-30度の斜め配置。
+・タイル状(格子状)に等間隔で繰り返し配置し、スライド全面を覆うこと。
+・1文字あたりのフォントサイズは小さめ(目安: 18〜24pt程度)、不透明度は薄め(目安: 10〜15%)に設定し、本文の可読性を妨げないこと。
+・フォントはサンセリフ体(Helvetica、Arial、Noto Sans等)を使用。
+・透かしはコンテンツ・図解・写真の背面に配置し、前面要素の視認性を最優先すること。`,
+
+  D: `【カラー指定（厳守）】
+・背景カラーは #FFFFFF（RGB: 255,255,255）を厳密に使用し、RGB値の変更・明度調整・彩度調整・透過・グラデーション・影・減光処理を一切行わず、必ず単色ベタ塗りで完全一致させること。
+・文字色は #212121(本文・見出し)。
+・アクセントカラーは #007AFF、警告・注意喚起カラーは #FF3B30。
+・視認性確保のため、白背景に淡色文字等の低コントラスト組み合わせは避けること。
+【デザイン】
+・白・黒を基調とし、アクセントに青(#007AFF)、警告に赤(#FF3B30)を使用する。
+・簡潔な図解を使用し、情報を整理して見やすく配置する。
+・余白を十分に取り、清潔感のあるレイアウトにすること。
+【トーン＆マナー】
+・初めての方でも安心できる優しい伴走型のトーン(煽る表現は避ける)。
+【強調表示】
+・注意喚起には赤色(#FF3B30)や目立つアイコンを使用してメリハリをつける。
+【使用する画像(スタッフ実写画像)】
+・イラストは使用しないこと。
+・原則として、ソース(アップロード資料)に含まれている実写写真をそのまま使用すること。
+・ソース内の写真の中から、内容に最も適した場面(作業中・案内中・説明中など)を選定して挿入する。
+・写真のトリミングや配置調整は可だが、人物の差し替え・合成・加工(色味の大幅変更、フィルター追加、AIによる修正等)は行わないこと。
+・ソースに該当する写真が含まれていない場合に限り、AIによる実写風画像を新規生成して挿入してよい。
+・新規生成する場合は、必ず「淡い水色のポロシャツとチノパン」を着たスタッフのリアルな実写風(写真的な)画像とすること。
+・性別・年齢は内容に合わせて自然に設定し、表情は柔らかく親しみやすい印象にすること。
+・スタッフが実際に作業している様子・案内している様子・説明している様子など、内容に即した自然なシチュエーションで人物を登場させること。
+・背景は白または淡いグレーのシンプルな環境とし、被写体(スタッフ)が主役として際立つようにすること。
+・照明は自然光のような柔らかい光を意識し、明るくクリアな写真品質にすること。
+・3Dレンダリング調・CG調・アニメ調・過度な加工は禁止。あくまで自然な実写写真のクオリティを保つこと。
+【ロゴ・キャラクターの非使用(厳守)】
+・ロゴ、キャラクター、マスコット、アイコン化された人物・動物等のシンボルマークは一切配置しないこと。
+・「黄色くて丸いキャラクター」を含む、いかなる企業ロゴ・キャラクターも全スライドにおいて使用禁止とする。
+・AIによるロゴ・キャラクターの自動生成・自動挿入も絶対禁止。
+・スライド右下を含む全領域において、ロゴ・キャラクターを意図せず生成・配置しないよう厳守すること。
+【コピー防止用の透かし(全スライド共通・必須)】
+・全スライド(表紙・本文・章扉・裏表紙すべて例外なく)の背景全面に「Timee」という文字を半透明のグレー(#212121)で透かしとして必ず配置すること。透かしの省略は不可。
+・配置角度は左下から右上に向けて約-30度の斜め配置。
+・タイル状(格子状)に等間隔で繰り返し配置し、スライド全面(四隅・端部含む)を漏れなく覆うこと。
+・1文字あたりのフォントサイズは小さめ(目安: 18〜24pt程度)、不透明度は薄め(目安: 8〜12%)に設定し、本文の可読性を妨げないこと。
+・フォントはサンセリフ体(Helvetica、Arial、Noto Sans等)を使用。
+・透かしはコンテンツ・図解・写真の背面に配置し、前面要素の視認性を最優先すること。
+・透かしレイヤーはすべてのスライドで同一の仕様(角度・間隔・サイズ・不透明度)を維持し、スライドごとに省略・変動しないこと。`
+};
+
+const DESIGN_NAMES = {
+  A: '黄色背景 × イラスト',
+  B: '白背景 × イラスト',
+  C: '黄色背景 × 実写',
+  D: '白背景 × 実写'
+};
+
+let selectedDesign = 'C';
+
+// =================================================
+// STEP 1: Design Selection
+// =================================================
+document.querySelectorAll('input[name="design"]').forEach(radio => {
+  radio.addEventListener('change', (e) => {
+    selectedDesign = e.target.value;
+    document.querySelectorAll('.design-card').forEach(card => {
+      card.classList.toggle('is-selected', card.dataset.design === selectedDesign);
+    });
+    updateStep5DesignDisplay();
+  });
+});
+
+function updateStep5DesignDisplay() {
+  document.getElementById('selectedDesignLetter').textContent = selectedDesign;
+  document.getElementById('selectedDesignName').textContent = DESIGN_NAMES[selectedDesign];
+  document.getElementById('designPromptLetter').textContent = selectedDesign;
+  document.getElementById('designPrompt').textContent = DESIGN_PROMPTS[selectedDesign];
+}
+// Initial setup
+updateStep5DesignDisplay();
+
+// =================================================
+// STEP 3: Video Mode Switching
+// =================================================
+document.querySelectorAll('input[name="mode"]').forEach(radio => {
+  radio.addEventListener('change', (e) => {
+    document.getElementById('setting-auto-scene').style.display = 'none';
+    document.getElementById('setting-interval').style.display = 'none';
+    document.getElementById('setting-manual').style.display = 'none';
+    document.getElementById(`setting-${e.target.value}`).style.display = 'block';
+  });
+});
+
+// =================================================
+// Helpers
+// =================================================
+const formatTime = (seconds) => {
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = Math.floor(seconds % 60);
+  if (h > 0) return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+};
+const parseTime = (timeStr) => {
+  const parts = timeStr.trim().split(':').map(Number);
+  if (parts.length === 1) return parts[0];
+  if (parts.length === 2) return parts[0] * 60 + parts[1];
+  if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+  return 0;
+};
+function base64DataURLToArrayBuffer(dataURL) {
+  const base64 = dataURL.split(',')[1];
+  const binary_string = window.atob(base64);
+  const len = binary_string.length;
+  const bytes = new Uint8Array(len);
+  for (let i = 0; i < len; i++) {
+    bytes[i] = binary_string.charCodeAt(i);
+  }
+  return bytes.buffer;
+}
+
+// Safe video seek with timeout to prevent infinite hang if 'seeked' event never fires
+function safeSeek(video, time, timeoutMs = 4000) {
+  return new Promise((resolve, reject) => {
+    let done = false;
+    const onSeeked = () => {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      video.removeEventListener('seeked', onSeeked);
+      resolve();
+    };
+    const timer = setTimeout(() => {
+      if (done) return;
+      done = true;
+      video.removeEventListener('seeked', onSeeked);
+      console.warn('[safeSeek] timeout at', time, 's — continuing anyway');
+      resolve(); // resolve instead of reject so loop continues
+    }, timeoutMs);
+    video.addEventListener('seeked', onSeeked);
+    try {
+      video.currentTime = time;
+    } catch (e) {
+      done = true;
+      clearTimeout(timer);
+      video.removeEventListener('seeked', onSeeked);
+      reject(e);
+    }
+  });
+}
+
+// Collect job content fields
+function collectJobContent() {
+  return {
+    jobTitle: document.getElementById('job-title').value.trim(),
+    industry: document.getElementById('job-industry').value,
+    description: document.getElementById('job-description').value.trim(),
+    notes: document.getElementById('job-notes').value.trim(),
+    items: document.getElementById('job-items').value.trim(),
+    pay: document.getElementById('job-pay').value.trim()
+  };
+}
+
+function buildJobInfoHTML(job, videoFileName) {
+  let html = '';
+  // Title
+  const titleText = job.jobTitle ? `${job.jobTitle}｜初回受け入れ用マニュアル` : `初回受け入れ用マニュアル`;
+  html += `<h2 class="doc-title">${escapeHtml(titleText)}</h2>`;
+
+  // Job info section
+  html += `<h3 class="job-info-heading">仕事内容</h3>`;
+  html += `<div class="job-info-block">`;
+  const fields = [
+    { label: '仕事タイトル', value: job.jobTitle },
+    { label: '業種', value: job.industry },
+    { label: '仕事内容', value: job.description },
+    { label: '注意事項', value: job.notes },
+    { label: '持ち物・装備', value: job.items },
+    { label: '待遇・時給', value: job.pay }
+  ];
+  for (const f of fields) {
+    if (f.value) {
+      html += `<div class="job-field">
+        <span class="job-label">${escapeHtml(f.label)}</span>
+        <span class="job-value">${escapeHtml(f.value)}</span>
+      </div>`;
+    }
+  }
+  html += `</div>`;
+
+  if (videoFileName) {
+    html += `<h3 class="video-heading">業務動画スクリーンショット（${escapeHtml(videoFileName)}）</h3>`;
+  }
+  return html;
+}
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// =================================================
+// STEP 3 → 4: Generate Preview
+// =================================================
+document.getElementById('generate-btn').addEventListener('click', async () => {
+  const fileInput = document.getElementById('video-file');
+  const mode = document.querySelector('input[name="mode"]:checked').value;
+  const embedText = document.getElementById('embed-text-chk').checked;
+  const preview = document.getElementById('doc-preview');
+  const statusText = document.getElementById('status');
+  const progressBar = document.getElementById('progress-bar');
+  const generateBtn = document.getElementById('generate-btn');
+  const downloadBtn = document.getElementById('download-btn');
+
+  const job = collectJobContent();
+  if (!job.jobTitle || !job.description) {
+    alert('STEP 02 の必須項目（仕事タイトル・仕事内容）を入力してください。');
+    document.getElementById('step2').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
+  const hasVideo = fileInput.files.length > 0;
+  const videoFileName = hasVideo ? fileInput.files[0].name : '';
+
+  generateBtn.disabled = true;
+  downloadBtn.disabled = true;
+  preview.innerHTML = '';
+  progressBar.style.display = 'block';
+  progressBar.value = 0;
+  statusText.classList.remove('is-success', 'is-error');
+
+  // Insert job content first
+  preview.insertAdjacentHTML('beforeend', buildJobInfoHTML(job, videoFileName));
+
+  // If no video, we're done early
+  if (!hasVideo) {
+    statusText.textContent = '✨ 仕事内容のプレビューを生成しました。動画がない場合はこのままWord保存できます。';
+    statusText.classList.add('is-success');
+    progressBar.value = 100;
+    setTimeout(() => { progressBar.style.display = 'none'; }, 2000);
+    generateBtn.disabled = false;
+    downloadBtn.disabled = false;
+    // Scroll to preview
+    document.getElementById('step4').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
+  // Process video
+  const file = fileInput.files[0];
+  const videoURL = URL.createObjectURL(file);
+  const video = document.createElement('video');
+  video.src = videoURL;
+  video.muted = true;
+  await new Promise((resolve) => {
+    video.addEventListener('loadedmetadata', resolve, { once: true });
+  });
+
+  let tasks = [];
+
+  try {
+    if (mode === 'manual') {
+      const inputData = document.getElementById('input-data').value;
+      if (!inputData.trim()) throw new Error('タイムスタンプを入力してください。');
+      const lines = inputData.split('\n');
+      const regex = /^([\d:]+)(?:\s+(.+))?$/;
+      for (let line of lines) {
+        line = line.trim();
+        if (!line) continue;
+        const match = line.match(regex);
+        if (match) {
+          tasks.push({
+            timeInSeconds: parseTime(match[1]),
+            timeStr: match[1],
+            text: match[2] || ""
+          });
+        }
+      }
+    } else if (mode === 'interval') {
+      const interval = parseInt(document.getElementById('interval-sec').value, 10);
+      if (isNaN(interval) || interval < 1) throw new Error('正しい間隔を入力してください。');
+      for (let t = 0; t <= video.duration; t += interval) {
+        tasks.push({ timeInSeconds: t, timeStr: formatTime(t), text: "" });
+      }
+    } else if (mode === 'auto-scene') {
+      statusText.textContent = "動画を解析中... (画面の切り替わりを探しています)";
+      console.log('[auto-scene] start, duration:', video.duration, 'sec');
+      const detectCanvas = document.createElement('canvas');
+      detectCanvas.width = 64;
+      detectCanvas.height = 64;
+      const detectCtx = detectCanvas.getContext('2d', { willReadFrequently: true });
+      let prevData = null;
+      const duration = video.duration;
+      const step = 1;
+      tasks.push({ timeInSeconds: 0, timeStr: formatTime(0), text: "" });
+      let iter = 0;
+      for (let t = 1; t <= duration; t += step) {
+        await safeSeek(video, t);
+        detectCtx.drawImage(video, 0, 0, 64, 64);
+        const currentData = detectCtx.getImageData(0, 0, 64, 64).data;
+        if (prevData) {
+          let diff = 0;
+          for (let i = 0; i < currentData.length; i += 4) {
+            diff += Math.abs(currentData[i] - prevData[i]) +
+                    Math.abs(currentData[i+1] - prevData[i+1]) +
+                    Math.abs(currentData[i+2] - prevData[i+2]);
+          }
+          const diffRatio = diff / (64 * 64 * 3 * 255);
+          if (diffRatio > 0.05) {
+            tasks.push({ timeInSeconds: t, timeStr: formatTime(t), text: "" });
+            t += 2;
+          }
+        }
+        prevData = new Uint8ClampedArray(currentData);
+        if (t % 5 === 0) {
+          progressBar.value = (t / duration) * 50;
+        }
+        // Yield to browser every 10 iterations to keep UI responsive
+        if (++iter % 10 === 0) {
+          await new Promise(r => setTimeout(r, 0));
+        }
+      }
+      console.log('[auto-scene] done,', tasks.length, 'scenes detected');
+    }
+
+    if (tasks.length === 0) throw new Error('抽出対象が見つかりませんでした。');
+
+    statusText.textContent = `スクリーンショットを生成中... (全${tasks.length}枚)`;
+
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext('2d');
+
+    for (let i = 0; i < tasks.length; i++) {
+      const task = tasks[i];
+      if (task.timeInSeconds > video.duration) continue;
+
+      await safeSeek(video, task.timeInSeconds);
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      if (embedText) {
+        const drawText = `[${task.timeStr}] ${task.text}`;
+        const fontSize = Math.max(20, Math.min(60, canvas.height * 0.05));
+        ctx.font = `bold ${fontSize}px sans-serif`;
+        const padding = fontSize * 0.5;
+        const barHeight = fontSize + padding * 2;
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
+        ctx.fillRect(0, canvas.height - barHeight, canvas.width, barHeight);
+        ctx.fillStyle = '#ffffff';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(drawText, padding, canvas.height - barHeight / 2);
+      }
+
+      const imageDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+      const block = document.createElement('div');
+      block.className = 'task-block';
+      block.style.marginBottom = '24px';
+
+      const descP = document.createElement('p');
+      const timeSpan = document.createElement('span');
+      timeSpan.className = 'timestamp';
+      timeSpan.textContent = `[${task.timeStr}] `;
+      descP.appendChild(timeSpan);
+      if (task.text) {
+        descP.appendChild(document.createTextNode(task.text));
+      } else {
+        const placeholder = document.createElement('span');
+        placeholder.className = 'edit-placeholder';
+        placeholder.textContent = 'ここをクリックして説明を入力...';
+        descP.appendChild(placeholder);
+      }
+      const img = document.createElement('img');
+      img.src = imageDataUrl;
+      img.alt = `${task.timeStr}のスクリーンショット`;
+
+      block.appendChild(descP);
+      block.appendChild(img);
+      preview.appendChild(block);
+
+      if (mode === 'auto-scene') {
+        progressBar.value = 50 + ((i + 1) / tasks.length) * 50;
+      } else {
+        progressBar.value = ((i + 1) / tasks.length) * 100;
+      }
+    }
+    statusText.textContent = "✨ 生成完了！プレビューを確認・編集してWordをダウンロードしてください。";
+    statusText.classList.add('is-success');
+    generateBtn.disabled = false;
+    // If transcription is enabled, keep download disabled until transcription completes
+    const willTranscribe = document.getElementById('transcribe-chk').checked;
+    if (!willTranscribe) {
+      downloadBtn.disabled = false;
+    }
+
+    // Optional: transcription
+    if (willTranscribe) {
+      try {
+        statusText.classList.remove('is-success');
+        statusText.textContent = '⏳ 音声書き起こし中... 完了までWordはダウンロードできません（このまま少しお待ちください）';
+        // Initialize debug log
+        clearAudioDebugLog();
+        showAudioDebugPanel();
+        appendAudioLog('音声解析を開始します（環境チェック中）', 'info');
+        appendAudioLog('ファイル: ' + file.name + ' / サイズ: ' + (file.size / 1024 / 1024).toFixed(1) + 'MB / 形式: ' + (file.type || '不明'), 'info');
+        // file:// protocol check
+        if (IS_FILE_PROTOCOL) {
+          appendAudioLog('⚠ file:// プロトコル検出。Whisperモジュール読込がブロックされる可能性が高いです', 'warn');
+          appendAudioLog('💡 解決法: ターミナルで python3 -m http.server 8000 → http://localhost:8000 経由でアクセスしてください', 'warn');
+        }
+        // Mobile warning
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+          appendAudioLog('⚠ モバイル端末を検出しました。Whisperはモバイルではメモリ不足で失敗する可能性があります。', 'warn');
+        }
+        if (!('Worker' in window)) {
+          appendAudioLog('❌ お使いのブラウザは Web Worker に未対応です', 'error');
+          throw new Error('Web Worker未対応');
+        }
+        if (!(window.AudioContext || window.webkitAudioContext)) {
+          appendAudioLog('❌ お使いのブラウザは Web Audio API に未対応です', 'error');
+          throw new Error('Web Audio API未対応');
+        }
+        appendAudioLog('✓ ブラウザの必須API（Worker / Web Audio）チェック完了', 'ok');
+
+        const transcriptResult = await transcribeVideoAudio(file, statusText);
+        appendAudioLog('文字起こし呼び出し完了。結果を集計します...', 'info');
+
+        // NEW: Clean up Whisper repetition hallucinations
+        if (transcriptResult) {
+          const stats = cleanupTranscriptResult(transcriptResult);
+          const totalRemoved = (stats.textBefore - stats.textAfter);
+          if (totalRemoved > 0 || stats.chunksCleaned > 0) {
+            appendAudioLog(`🧹 繰り返し除去: 全文 ${stats.textBefore}→${stats.textAfter}文字 (${totalRemoved}文字削減) / ${stats.chunksCleaned}チャンク補正 (累計${stats.chunkCharsRemoved}文字)`, 'ok');
+          } else {
+            appendAudioLog('クリーンアップ：繰り返し検出なし（綺麗な出力）', 'info');
+          }
+        }
+
+        if (transcriptResult && transcriptResult.text) {
+          const fullText = transcriptResult.text.trim();
+          appendAudioLog('✓ 文字起こし結果: ' + fullText.length + '文字 / ' + (transcriptResult.chunks ? transcriptResult.chunks.length : 0) + 'チャンク', 'ok');
+          appendAudioLog('プレビュー先頭: ' + fullText.substring(0, 80) + (fullText.length > 80 ? '...' : ''), 'info');
+          insertTranscriptBlock(fullText, preview);
+          appendAudioLog('✓ Wordプレビューに「音声書き起こし」ブロックを追加しました', 'ok');
+          // Auto-annotate screenshots with the matching transcript chunks
+          let annotatedCount = 0;
+          if (transcriptResult.chunks && transcriptResult.chunks.length) {
+            annotatedCount = annotateScreenshotsWithTranscript(preview, transcriptResult.chunks);
+            appendAudioLog('✓ ' + annotatedCount + '枚のスクショに該当時刻のセリフを自動挿入しました', 'ok');
+          } else {
+            appendAudioLog('チャンク情報がないため、スクショ個別への自動挿入はスキップ', 'warn');
+          }
+          showAudioDebugSummary(`✅ 正常完了：<code>${fullText.length}</code>文字を反映 / <code>${annotatedCount}</code>枚のスクショへ自動挿入`);
+          const annotateMsg = annotatedCount > 0
+            ? ` ${annotatedCount}枚のスクショに該当時刻のセリフを自動挿入しました。`
+            : '';
+          statusText.textContent = `✨ スクショ＋音声書き起こし完了！Wordをダウンロードできます。${annotateMsg}`;
+          statusText.classList.add('is-success');
+        } else {
+          appendAudioLog('❌ 文字起こし結果が空でした（音声なし／無音／非対応言語の可能性）', 'error');
+          showAudioDebugSummary('❌ 結果が空：動画に音声トラックが無いか、無音または日本語以外の音声の可能性があります。');
+          statusText.textContent = "✨ スクショ生成完了（音声書き起こしは結果が空でした）。Wordをダウンロードできます。";
+          statusText.classList.add('is-success');
+        }
+      } catch (err) {
+        console.error('Transcription failed:', err);
+        appendAudioLog('❌ エラー: ' + (err.message || String(err)), 'error');
+        if (err.stack) appendAudioLog('スタックトレース: ' + err.stack.split('\n').slice(0, 3).join(' | '), 'error');
+        // Distinguish file:// failures from other failures
+        if (IS_FILE_PROTOCOL && /Worker|停止|error event/.test(err.message || '')) {
+          appendAudioLog('🚨 file:// プロトコルが原因の可能性が極めて高いです', 'error');
+          showAudioDebugSummary(`🚨 <strong>file:// による失敗</strong>：このHTMLを直接ダブルクリックで開いていませんか？<br>解決：ターミナルで <code>python3 -m http.server 8000</code> を実行し、<code>http://localhost:8000</code> 経由でアクセスしてください。`);
+        } else {
+          showAudioDebugSummary(`❌ 失敗：<code>${(err.message || err).toString().substring(0, 200)}</code> ／「コピー」ボタンでログを取得して開発者に送ってください`);
+        }
+        statusText.textContent = `⚠ 音声書き起こしに失敗しました: ${err.message}（スクショは生成済み・Wordはダウンロードできます）`;
+        statusText.classList.add('is-error');
+      } finally {
+        // Always enable download after transcription (success or failure)
+        downloadBtn.disabled = false;
+      }
+    }
+
+    // Scroll to preview
+    document.getElementById('step4').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  } catch (err) {
+    statusText.textContent = `エラー: ${err.message}`;
+    statusText.classList.add('is-error');
+    generateBtn.disabled = false;
+  } finally {
+    setTimeout(() => { progressBar.style.display = 'none'; }, 2000);
+  }
+});
+
+// =================================================
+// STEP 4 → 5: Download Word + Reveal Step 5
+// =================================================
+document.getElementById('download-btn').addEventListener('click', async () => {
+  const btn = document.getElementById('download-btn');
+  const originalText = btn.innerHTML;
+  btn.innerHTML = "📄 Wordファイルを生成中...";
+  btn.disabled = true;
+
+  try {
+    let docxLib;
+    try {
+      docxLib = await import('https://cdn.jsdelivr.net/npm/docx@8.5.0/+esm');
+    } catch (err1) {
+      docxLib = await import('https://esm.sh/docx@8.5.0');
+    }
+    const { Document, Packer, Paragraph, TextRun, ImageRun, HeadingLevel } = docxLib;
+    const preview = document.getElementById('doc-preview');
+    const children = [];
+
+    // 1. Title (h2.doc-title)
+    const titleEl = preview.querySelector('h2.doc-title');
+    if (titleEl) {
+      children.push(new Paragraph({
+        children: [new TextRun({ text: titleEl.innerText, bold: true, size: 36, color: '2A2520' })],
+        spacing: { after: 400 }
+      }));
+    }
+
+    // 2. Job info heading + fields
+    const jobHeading = preview.querySelector('h3.job-info-heading');
+    if (jobHeading) {
+      children.push(new Paragraph({
+        children: [new TextRun({ text: jobHeading.innerText, bold: true, size: 28, color: 'E55A28' })],
+        spacing: { before: 200, after: 200 }
+      }));
+    }
+    // Iterate job fields
+    const jobFields = preview.querySelectorAll('.job-info-block .job-field');
+    for (const field of jobFields) {
+      const labelEl = field.querySelector('.job-label');
+      const valueEl = field.querySelector('.job-value');
+      if (labelEl) {
+        children.push(new Paragraph({
+          children: [new TextRun({ text: `【${labelEl.innerText}】`, bold: true, size: 24 })],
+          spacing: { before: 100, after: 80 }
+        }));
+      }
+      if (valueEl && valueEl.innerText.trim()) {
+        // Split value by line breaks
+        const lines = valueEl.innerText.split('\n');
+        for (const line of lines) {
+          children.push(new Paragraph({
+            children: [new TextRun({ text: line.trim() || ' ', size: 22 })],
+            spacing: { after: 60 }
+          }));
+        }
+      }
+    }
+
+    // 3. Video heading
+    const videoHeading = preview.querySelector('h3.video-heading');
+    if (videoHeading) {
+      children.push(new Paragraph({
+        children: [new TextRun({ text: videoHeading.innerText, bold: true, size: 28, color: 'E55A28' })],
+        spacing: { before: 400, after: 200 }
+      }));
+    }
+
+    // 4. Task blocks (screenshots)
+    const blocks = preview.querySelectorAll('.task-block');
+    for (const block of blocks) {
+      const pEl = block.querySelector('p');
+      const imgEl = block.querySelector('img');
+      if (pEl) {
+        const clonedP = pEl.cloneNode(true);
+        const placeholder = clonedP.querySelector('.edit-placeholder');
+        if (placeholder) placeholder.remove();
+        const text = clonedP.innerText.trim();
+        children.push(new Paragraph({
+          children: [new TextRun({ text: text, size: 22 })],
+          spacing: { after: 120 }
+        }));
+      }
+      if (imgEl && imgEl.src.startsWith('data:image')) {
+        const arrayBuffer = base64DataURLToArrayBuffer(imgEl.src);
+        const natWidth = imgEl.naturalWidth || 1280;
+        const natHeight = imgEl.naturalHeight || 720;
+        const ratio = natHeight / natWidth;
+        const wordWidth = 600;
+        const wordHeight = Math.floor(wordWidth * ratio);
+        children.push(new Paragraph({
+          children: [
+            new ImageRun({
+              data: arrayBuffer,
+              transformation: { width: wordWidth, height: wordHeight }
+            })
+          ],
+          spacing: { after: 300 }
+        }));
+      }
+    }
+
+    // 5. Transcript block (if present)
+    const transcriptHeading = preview.querySelector('h3.transcript-heading');
+    const transcriptTextEl = preview.querySelector('p.transcript-text');
+    if (transcriptHeading && transcriptTextEl && transcriptTextEl.textContent.trim()) {
+      children.push(new Paragraph({
+        children: [new TextRun({ text: '🎙 音声書き起こし', bold: true, size: 28, color: '3B5BDB' })],
+        spacing: { before: 400, after: 200 }
+      }));
+      const transcriptLines = transcriptTextEl.textContent.split(/\n+/);
+      for (const line of transcriptLines) {
+        const t = line.trim();
+        if (t) {
+          children.push(new Paragraph({
+            children: [new TextRun({ text: t, size: 22 })],
+            spacing: { after: 100 }
+          }));
+        }
+      }
+    }
+
+    const doc = new Document({
+      sections: [{ properties: {}, children: children }]
+    });
+    const blob = await Packer.toBlob(doc);
+
+    // Generate filename from job info
+    const job = collectJobContent();
+    const safeFn = (job.jobTitle || 'マニュアル').replace(/[\/\\:*?"<>|]/g, '_');
+    const fileName = `${safeFn}_初回受け入れマニュアル.docx`;
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    // Reveal STEP 5
+    const step5 = document.getElementById('step5');
+    step5.classList.add('is-revealed');
+    updateStep5DesignDisplay();
+    setTimeout(() => {
+      step5.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 400);
+
+  } catch (err) {
+    alert('Wordファイルの生成に失敗しました: ' + err.message);
+    console.error(err);
+  } finally {
+    btn.innerHTML = originalText;
+    btn.disabled = false;
+  }
+});
+
+// =================================================
+// Copy buttons for prompts (STEP 5)
+// =================================================
+document.querySelectorAll('.prompt-card-copy').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const targetId = btn.dataset.target;
+    const text = document.getElementById(targetId).textContent;
+    try {
+      await navigator.clipboard.writeText(text);
+      const original = btn.textContent;
+      btn.textContent = '✓ コピー済';
+      btn.classList.add('is-copied');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('is-copied');
+      }, 1800);
+    } catch (e) {
+      btn.textContent = '⚠ 失敗';
+      setTimeout(() => { btn.textContent = '📋 コピー'; }, 1800);
+    }
+  });
+});
+
+// =================================================
+// SHOOTING GUIDE: CAROUSEL + MODAL
+// =================================================
+const GUIDE_DATA = {
+  logistics_picking: {
+    industry: 'LOGISTICS',
+    title: '物流｜出荷ピッキング',
+    duration: '90秒',
+    img: './image/guide_logistics_picking.png',
+    scenes: [
+      { ts: '0:00-0:15', t: '装備見せ＆指示確認', d: '軍手・安全靴を見せ、ハンディを読む' },
+      { ts: '0:15-0:30', t: '棚番スキャン', d: '棚番ラベルにハンディをかざす' },
+      { ts: '0:30-0:45', t: '商品スキャン', d: '商品バーコードにかざす' },
+      { ts: '0:45-1:10', t: '指差し呼称', d: '1個ずつ指差してカゴ車へ' },
+      { ts: '1:10-1:30', t: '確定＆移動', d: '数量入力しカゴ車を押す' }
+    ],
+    lines: '「軍手・安全靴OK。棚番A-01-3、数量2」「棚番スキャン、ピッ、棚一致」「商品スキャン、ピッ、コード一致」「2個取ります。1個、2個」「数量2、確定。検品エリアへ」',
+    note: null
+  },
+  retail_stocking: {
+    industry: 'RETAIL',
+    title: '小売｜品出し',
+    duration: '120秒',
+    img: './image/guide_retail_stocking.png',
+    scenes: [
+      { ts: '0:00-0:25', t: '開封', d: 'カッターを手前→奥へ滑らせる' },
+      { ts: '0:25-0:45', t: '積載', d: '賞味期限を1本ずつ確認' },
+      { ts: '0:45-1:05', t: '移動', d: '通路右寄りで台車を押す' },
+      { ts: '1:05-1:40', t: 'JAN照合＆先入れ先出し', d: '棚札と商品を指差しで照合' },
+      { ts: '1:40-2:00', t: '前出し', d: 'ラベルを正面に向けて整える' }
+    ],
+    lines: '「指は刃の進行方向に置きません」「賞味期限を見ながら積みます」「お客さま優先、通路右寄り」「JAN末尾4桁が一致。古いものを手前へ」「ラベルを正面、面を揃えます」',
+    note: null
+  },
+  restaurant_order: {
+    industry: 'RESTAURANT',
+    title: '飲食｜お客さま案内〜オーダー取り',
+    duration: '120秒',
+    img: './image/guide_restaurant_order.png',
+    scenes: [
+      { ts: '0:00-0:15', t: '出迎え', d: '笑顔で頭を下げる' },
+      { ts: '0:15-0:40', t: '席へ案内', d: '先導し椅子を引く' },
+      { ts: '0:40-1:00', t: 'おしぼり・お水', d: 'お客さまから見て右側に置く' },
+      { ts: '1:00-1:40', t: '注文取り＆復唱', d: 'ハンディに入力する' },
+      { ts: '1:40-2:00', t: '厨房送信', d: '送信ボタンを押す' }
+    ],
+    lines: '「いらっしゃいませ。2名さまですか？」「こちらのお席にどうぞ」「お冷とおしぼりです」「Aランチ1、Bランチ1、繰り返します」「ご注文承りました」',
+    note: null
+  },
+  care_transfer: {
+    industry: 'CARE',
+    title: '介護｜移乗介助',
+    duration: '90秒',
+    img: './image/guide_care_transfer.png',
+    scenes: [
+      { ts: '0:00-0:15', t: '事前説明', d: '正面に立ち目線を合わせる' },
+      { ts: '0:15-0:35', t: 'ブレーキ確認', d: '車椅子を30°寄せ、ブレーキを押す' },
+      { ts: '0:35-0:55', t: '立ち上がり', d: '両膝を自分の膝で支える' },
+      { ts: '0:55-1:15', t: '方向転換＆着座', d: 'ゆっくり旋回して腰を下ろす' },
+      { ts: '1:15-1:30', t: '終了', d: 'ベッド中央に座り直す' }
+    ],
+    lines: '「ベッドにお移りしますね」「ブレーキかけました」「1、2、3で立ちますよ」「そのまま腰を下ろして」「お疲れさまでした」',
+    note: 'ご利用者の顔・氏名・部屋番号が映り込まないよう徹底。代理演者を立てるのが安全です。'
+  },
+  care_meal: {
+    industry: 'CARE',
+    title: '介護｜食事介助',
+    duration: '90秒',
+    img: './image/guide_care_meal.png',
+    scenes: [
+      { ts: '0:00-0:10', t: '挨拶', d: '食札を見せる' },
+      { ts: '0:10-0:25', t: '姿勢確認', d: '背もたれと足元を整える' },
+      { ts: '0:25-0:50', t: '介助開始', d: 'スプーンを下から運ぶ' },
+      { ts: '0:50-1:15', t: '嚥下確認', d: '飲み込みを目視で待つ' },
+      { ts: '1:15-1:30', t: '終了', d: '口元を拭く' }
+    ],
+    lines: '「お昼ごはんお持ちしました」「背中まっすぐ、足は床に？」「お粥からいきますね」「飲み込めましたか？」「ごちそうさまでした」',
+    note: 'ご利用者の顔・氏名・部屋番号が映り込まないよう徹底。スプーンは必ず下から運ぶ（誤嚥防止）。'
+  },
+  mfg_label: {
+    industry: 'MANUFACTURING',
+    title: '製造｜ラベル貼り',
+    duration: '60秒',
+    img: './image/guide_mfg_label.png',
+    scenes: [
+      { ts: '0:00-0:10', t: 'ラベル準備', d: 'ラベル台紙から1枚剥がす' },
+      { ts: '0:10-0:25', t: 'ボトルを固定', d: '左手で持ち作業位置で安定させる' },
+      { ts: '0:25-0:40', t: '位置合わせ', d: 'ラベル上端をボトル肩の下に合わせる' },
+      { ts: '0:40-0:55', t: '中央から外へ', d: '親指で中央から外へ押し付け空気を抜く' },
+      { ts: '0:55-1:00', t: '完成品ラインへ', d: 'ベルトに戻すか完成品トレーに移す' }
+    ],
+    lines: '「ラベルを1枚、剥がします」「ボトルを左手で固定。ぐらつかせません」「位置はボトルの肩の下。合わせ目に注意」「中央から外へ、空気を抜きながら密着させます」「完成、ラインへ戻します。次のボトルへ」',
+    note: 'ラベルの位置ズレ・気泡・シワが品質クレームの典型。「中央から外へ」のセリフは必ず入れてください。'
+  },
+  mfg_packaging: {
+    industry: 'MANUFACTURING',
+    title: '製造｜製品の個包装',
+    duration: '90秒',
+    img: './image/guide_mfg_packaging.png',
+    scenes: [
+      { ts: '0:00-0:15', t: '包装紙を準備', d: '1枚取り、台の上に広げる' },
+      { ts: '0:15-0:35', t: '商品を中央に置く', d: '端だと折りにくい' },
+      { ts: '0:35-0:55', t: '折り込む', d: '左右→上下の順、折り目をきっちり' },
+      { ts: '0:55-1:15', t: 'シールで封', d: '合わせ目に貼って密着' },
+      { ts: '1:15-1:30', t: '出荷箱へ', d: '重ねず横並びで' }
+    ],
+    lines: '「包装紙を1枚、台に広げます」「商品は必ず中央に。端だと折りにくいです」「左右、上下の順に。折り目をきっちりつけます」「シールで封をします。空気を抜きながら密着」「完成、箱に並べます。重ねず横並びで」',
+    note: '折り順（左右→上下）を間違えると見栄えが崩れる。出荷箱は「重ねず横並び」で必ず指示してください。'
+  }
+};
+
+function escapeHtml2(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function openGuideModal(key) {
+  const guide = GUIDE_DATA[key];
+  if (!guide) return;
+  const body = document.getElementById('guideModalBody');
+  const scenesHtml = guide.scenes.map(s =>
+    `<li><span class="ts">${escapeHtml2(s.ts)}</span><strong>${escapeHtml2(s.t)}</strong> ${escapeHtml2(s.d)}</li>`
+  ).join('');
+  body.innerHTML = `
+    <div class="guide-modal-industry">${escapeHtml2(guide.industry)}</div>
+    <h2 class="guide-modal-title">${escapeHtml2(guide.title)}</h2>
+    <span class="guide-modal-duration">${escapeHtml2(guide.duration)}</span>
+    <div class="guide-modal-img"><img src="${guide.img}" alt="${escapeHtml2(guide.title)}"></div>
+    <ol class="guide-modal-scenes">${scenesHtml}</ol>
+    <div class="guide-modal-lines">${escapeHtml2(guide.lines)}</div>
+    ${guide.note ? `<div class="guide-modal-note">⚠️ ${escapeHtml2(guide.note)}</div>` : ''}
+  `;
+  document.getElementById('guideModal').classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGuideModal() {
+  document.getElementById('guideModal').classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+
+// Click handlers
+document.querySelectorAll('.guide-card').forEach(card => {
+  card.addEventListener('click', () => openGuideModal(card.dataset.guide));
+});
+document.getElementById('guideModal').addEventListener('click', closeGuideModal);
+document.querySelector('.guide-modal-close').addEventListener('click', closeGuideModal);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGuideModal(); });
+
+// Carousel scroll buttons
+(function setupGuideCarousel() {
+  const track = document.getElementById('guideTrack');
+  const prev = document.getElementById('guidePrev');
+  const next = document.getElementById('guideNext');
+  if (!track || !prev || !next) return;
+  const getStep = () => {
+    const card = track.querySelector('.guide-card');
+    if (!card) return 200;
+    return card.getBoundingClientRect().width + 12;
+  };
+  const updateBtns = () => {
+    prev.disabled = track.scrollLeft <= 4;
+    next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+  };
+  prev.addEventListener('click', () => track.scrollBy({ left: -getStep() * 2, behavior: 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left: getStep() * 2, behavior: 'smooth' }));
+  track.addEventListener('scroll', updateBtns, { passive: true });
+  window.addEventListener('resize', updateBtns);
+  setTimeout(updateBtns, 100);
+})();
+
+// =================================================
+// TRANSCRIPT CLEANUP — Whisper-tiny の繰り返しハルシネーション対策
+// =================================================
+// Whisper-tinyは長尺音声で同じフレーズを延々と繰り返す挙動が稀に起きる。
+// 出力後に同じパターンが4回以上連続する箇所を1回に圧縮する。
+function cleanupTranscriptText(text) {
+  if (!text || typeof text !== 'string') return text;
+  let cleaned = text;
+  // 反復処理：1回のパスで取り切れない多段ループにも対応
+  let prevLen = -1, iters = 0;
+  while (cleaned.length !== prevLen && iters < 5) {
+    prevLen = cleaned.length;
+    // Phase 1: フレーズ繰り返し（3〜20文字パターンが4回以上連続）
+    //   例: "言って言って言って言って" → "言って"
+    //   長いパターンから先に処理（"言ってって"のような複合パターンを優先）
+    for (let len = 20; len >= 3; len--) {
+      const re = new RegExp(`(.{${len}})\\1{3,}`, 'gs');
+      cleaned = cleaned.replace(re, '$1');
+    }
+    // Phase 2: 2文字繰り返し（誤検知防止のため6回以上から）
+    //   例: "あ、あ、あ、あ、あ、あ、" → "あ、"
+    cleaned = cleaned.replace(/(.{2})\1{5,}/gs, '$1');
+    // Phase 3: 1文字の連続（10文字以上）
+    //   例: "ーーーーーーーーーー" → "ー"
+    cleaned = cleaned.replace(/(.)\1{9,}/gs, '$1');
+    iters++;
+  }
+  // Phase 4: 連続スペースを1つに
+  cleaned = cleaned.replace(/[ \t]+/g, ' ').replace(/ *\n */g, '\n').trim();
+  return cleaned;
+}
+
+// 戻り値: { text, chunks, cleanupStats }
+function cleanupTranscriptResult(result) {
+  if (!result) return result;
+  let textBefore = 0, textAfter = 0;
+  let chunksCleaned = 0, chunkCharsRemoved = 0;
+  if (typeof result.text === 'string') {
+    textBefore = result.text.length;
+    result.text = cleanupTranscriptText(result.text);
+    textAfter = result.text.length;
+  }
+  if (Array.isArray(result.chunks)) {
+    for (const c of result.chunks) {
+      if (c && typeof c.text === 'string') {
+        const before = c.text.length;
+        c.text = cleanupTranscriptText(c.text);
+        const diff = before - c.text.length;
+        if (diff > 0) {
+          chunksCleaned++;
+          chunkCharsRemoved += diff;
+        }
+      }
+    }
+  }
+  return {
+    textBefore, textAfter,
+    chunksCleaned, chunkCharsRemoved
+  };
+}
+
+// =================================================
+// FILE:// PROTOCOL DETECTION (must run before transcription)
+// =================================================
+const IS_FILE_PROTOCOL = (window.location.protocol === 'file:');
+if (IS_FILE_PROTOCOL) {
+  document.addEventListener('DOMContentLoaded', () => {
+    const warningHTML = `
+      <div class="file-protocol-warning">
+        <div class="file-protocol-warning-icon">⚠</div>
+        <div class="file-protocol-warning-text">
+          <strong>⚠ このまま開くと音声認識（AI文字起こし）が動きません</strong>
+          HTMLファイルをダブルクリックで直接開く方式（<code>file://</code>）だと、Chromeのセキュリティ制約で Whisper の Web Worker が起動できません。スクショ生成のみ動作します。<br><br>
+          <strong style="color:var(--ink); display:inline; font-size:13.5px;">✅ 解決方法（音声認識を使いたい場合）</strong>
+          <ol>
+            <li>ターミナルを開く（⌘+Space → 「ターミナル」と入力）</li>
+            <li>このファイルがあるフォルダへ移動：<br><code>cd ~/Downloads/timee_manual_tool_deploy</code></li>
+            <li>HTTPサーバーを起動：<br><code>python3 -m http.server 8000</code></li>
+            <li>Chromeで <code>http://localhost:8000</code> を開いて、このHTMLをクリック</li>
+          </ol>
+          <span class="url-now">現在のURL: ${window.location.href}</span>
+        </div>
+      </div>
+    `;
+    const container = document.querySelector('.container');
+    const hero = container ? container.querySelector('header.hero') : null;
+    if (container && hero) {
+      const div = document.createElement('div');
+      div.innerHTML = warningHTML;
+      hero.parentNode.insertBefore(div.firstElementChild, hero.nextSibling);
+    }
+  });
+}
+
+// =================================================
+// AUDIO DEBUG LOG (visible in UI for diagnostics)
+// =================================================
+const audioDebugPanel = document.getElementById('audio-debug-panel');
+const audioDebugBody = document.getElementById('audio-debug-body');
+const audioDebugSummary = document.getElementById('audio-debug-summary');
+let audioDebugStartTime = 0;
+
+function showAudioDebugPanel() {
+  audioDebugPanel.classList.add('is-visible');
+}
+function clearAudioDebugLog() {
+  audioDebugBody.innerHTML = '';
+  audioDebugSummary.innerHTML = '';
+  audioDebugSummary.classList.remove('is-visible');
+  audioDebugPanel.classList.remove('has-error');
+  audioDebugStartTime = performance.now();
+}
+function appendAudioLog(msg, level) {
+  level = level || 'info'; // info | warn | error | ok
+  const elapsed = audioDebugStartTime ? ((performance.now() - audioDebugStartTime) / 1000).toFixed(1) + 's' : '0s';
+  const line = document.createElement('div');
+  line.className = 'audio-log-line';
+  line.innerHTML = `<span class="audio-log-time">+${elapsed}</span><span class="audio-log-level is-${level}">${level}</span><span class="audio-log-msg"></span>`;
+  line.querySelector('.audio-log-msg').textContent = msg; // textContent to escape HTML safely
+  audioDebugBody.appendChild(line);
+  audioDebugBody.scrollTop = audioDebugBody.scrollHeight;
+  if (level === 'error') audioDebugPanel.classList.add('has-error');
+  // Also mirror to console
+  if (level === 'error') console.error('[AudioLog]', msg);
+  else if (level === 'warn') console.warn('[AudioLog]', msg);
+  else console.log('[AudioLog]', msg);
+}
+function showAudioDebugSummary(html) {
+  audioDebugSummary.innerHTML = html;
+  audioDebugSummary.classList.add('is-visible');
+}
+// Copy log button
+document.getElementById('audio-debug-copy').addEventListener('click', async () => {
+  const lines = Array.from(audioDebugBody.querySelectorAll('.audio-log-line')).map(l => {
+    const t = l.querySelector('.audio-log-time').textContent;
+    const lv = l.querySelector('.audio-log-level').textContent;
+    const m = l.querySelector('.audio-log-msg').textContent;
+    return `[${t}] ${lv.toUpperCase()}: ${m}`;
+  });
+  const env = [
+    '=== Environment ===',
+    'UA: ' + navigator.userAgent,
+    'Platform: ' + navigator.platform,
+    'Cores: ' + (navigator.hardwareConcurrency || 'unknown'),
+    'Memory: ' + (navigator.deviceMemory ? navigator.deviceMemory + 'GB' : 'unknown'),
+    'Online: ' + navigator.onLine,
+    '=== Audio Log ==='
+  ].join('\n');
+  const text = env + '\n' + lines.join('\n');
+  try {
+    await navigator.clipboard.writeText(text);
+    const btn = document.getElementById('audio-debug-copy');
+    const orig = btn.textContent;
+    btn.textContent = '✓ コピー済み';
+    setTimeout(() => { btn.textContent = orig; }, 2000);
+  } catch (e) {
+    alert('コピーに失敗しました。手動でログを選択してコピーしてください。');
+  }
+});
+document.getElementById('audio-debug-clear').addEventListener('click', () => {
+  clearAudioDebugLog();
+});
+
+// =================================================
+// AUDIO TRANSCRIPTION (Whisper via Transformers.js) — 改良版
+// =================================================
+// 改善点:
+//  1. タイムアウト保護（モデル読込5分、文字起こし15分、音声抽出5分）
+//  2. Workerクラッシュ時に保留Promise即rejectで無限ハング防止
+//  3. エラー時にWorker状態をリセットしてリトライ可能に
+//  4. transformers.js CDN を3段フォールバック
+//  5. 空音声・無音の早期検出
+const WHISPER_WORKER_SRC = `
+  let transcriber = null;
+  // 公式の pre-built ESM bundle を使用（/+esm や esm.sh は遅延登録コードを欠落させて
+  // "Unsupported model type: whisper" や "registerBackend null" を起こすため避ける）
+  const CDN_LIST = [
+    'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2/dist/transformers.min.js',
+    'https://unpkg.com/@xenova/transformers@2.17.2/dist/transformers.min.js'
+  ];
+  // 1つのCDN試行で「ライブラリimport + Whisperパイプライン作成」を完走させる
+  // pipeline作成時に"Unsupported model type"が出たCDNは捨てて次へ
+  async function loadAndInitPipeline(model, onProgress) {
+    let lastErr = null;
+    for (const url of CDN_LIST) {
+      try {
+        self.postMessage({ type: 'log', msg: 'CDN試行: ' + url });
+        const mod = await import(url);
+        if (!mod || !mod.pipeline || !mod.env) {
+          throw new Error('モジュール構造不正（pipeline/env が見つかりません）');
+        }
+        self.postMessage({ type: 'log', msg: 'CDN import 成功 → Whisperパイプライン作成中: ' + url });
+        mod.env.allowLocalModels = false;
+        const pipe = await mod.pipeline('automatic-speech-recognition', model, {
+          quantized: true,
+          progress_callback: onProgress
+        });
+        self.postMessage({ type: 'log', msg: '✓ Whisper初期化完了 (CDN: ' + url + ')' });
+        return pipe;
+      } catch (e) {
+        lastErr = e;
+        const msg = (e && e.message) || String(e);
+        self.postMessage({ type: 'log', msg: '✗ CDN失敗: ' + url + ' / ' + msg });
+        // "Unsupported model type" や "registerBackend" 系は次のCDNでリトライする価値あり
+      }
+    }
+    throw new Error('全CDNでWhisperパイプライン作成に失敗: ' + (lastErr && lastErr.message));
+  }
+  self.addEventListener('message', async (e) => {
+    const { type, data } = e.data;
+    try {
+      if (type === 'load') {
+        transcriber = await loadAndInitPipeline(
+          data.model,
+          (p) => self.postMessage({ type: 'progress', data: p })
+        );
+        self.postMessage({ type: 'ready' });
+      } else if (type === 'transcribe') {
+        if (!transcriber) throw new Error('Whisper not loaded');
+        if (!data.audio || data.audio.length === 0) {
+          throw new Error('音声データが空です（動画に音声トラックが無い可能性）');
+        }
+        // 簡易無音チェック：平均絶対振幅
+        let sum = 0;
+        const sampleStep = Math.max(1, Math.floor(data.audio.length / 1000));
+        for (let i = 0; i < data.audio.length; i += sampleStep) sum += Math.abs(data.audio[i]);
+        const avgAmp = sum / (data.audio.length / sampleStep);
+        self.postMessage({ type: 'log', msg: '音声サンプル数=' + data.audio.length + ', 平均振幅=' + avgAmp.toFixed(5) });
+        if (avgAmp < 0.001) {
+          self.postMessage({ type: 'log', msg: '⚠ ほぼ無音の可能性（avgAmp < 0.001）' });
+        }
+        const result = await transcriber(data.audio, {
+          language: 'japanese',
+          task: 'transcribe',
+          return_timestamps: true,
+          chunk_length_s: 30,
+          stride_length_s: 5
+        });
+        self.postMessage({ type: 'result', data: result });
+      }
+    } catch (err) {
+      self.postMessage({ type: 'error', data: (err && err.message) || String(err) });
+    }
+  });
+`;
+
+let whisperWorker = null;
+let whisperWorkerUrl = null;
+let whisperWorkerReady = false;
+let whisperLoadingPromise = null;
+// 保留中のhandlerを追跡して、Workerクラッシュ時に全部rejectする
+const whisperPendingRejectors = new Set();
+
+function resetWhisperWorker(reason) {
+  console.warn('[Whisper] Worker reset:', reason);
+  // 全ての保留中Promiseを失敗させる
+  for (const reject of whisperPendingRejectors) {
+    try { reject(new Error('Whisper Workerが停止しました: ' + reason)); } catch (_) {}
+  }
+  whisperPendingRejectors.clear();
+  try { whisperWorker && whisperWorker.terminate(); } catch (_) {}
+  if (whisperWorkerUrl) {
+    try { URL.revokeObjectURL(whisperWorkerUrl); } catch (_) {}
+    whisperWorkerUrl = null;
+  }
+  whisperWorker = null;
+  whisperWorkerReady = false;
+  whisperLoadingPromise = null;
+}
+
+function getWhisperWorker() {
+  if (whisperWorker) return whisperWorker;
+  const blob = new Blob([WHISPER_WORKER_SRC], { type: 'application/javascript' });
+  whisperWorkerUrl = URL.createObjectURL(blob);
+  whisperWorker = new Worker(whisperWorkerUrl, { type: 'module' });
+  whisperWorker.addEventListener('error', (e) => {
+    console.error('[Whisper Worker error]', e.message, e.filename, e.lineno, e);
+    resetWhisperWorker('error event: ' + (e.message || 'unknown'));
+  });
+  whisperWorker.addEventListener('messageerror', (e) => {
+    console.error('[Whisper Worker messageerror]', e);
+    resetWhisperWorker('messageerror event');
+  });
+  return whisperWorker;
+}
+
+// 任意のPromiseにタイムアウトを付与する汎用ラッパ
+function withTimeout(promise, ms, errMsg) {
+  let timer;
+  return Promise.race([
+    promise.finally(() => clearTimeout(timer)),
+    new Promise((_, reject) => { timer = setTimeout(() => reject(new Error(errMsg)), ms); })
+  ]);
+}
+
+async function loadWhisperWorker(model, onProgress) {
+  if (whisperWorkerReady) return;
+  if (whisperLoadingPromise) return whisperLoadingPromise;
+  const worker = getWhisperWorker();
+  whisperLoadingPromise = new Promise((resolve, reject) => {
+    whisperPendingRejectors.add(reject);
+    const handler = (e) => {
+      const { type, data, msg } = e.data;
+      if (type === 'log') {
+        console.log('[Whisper Worker]', msg);
+        if (typeof appendAudioLog === 'function') appendAudioLog('[Worker] ' + msg, 'info');
+      } else if (type === 'ready') {
+        worker.removeEventListener('message', handler);
+        whisperPendingRejectors.delete(reject);
+        whisperWorkerReady = true;
+        whisperLoadingPromise = null;
+        resolve();
+      } else if (type === 'progress') {
+        if (onProgress) onProgress(data);
+      } else if (type === 'error') {
+        worker.removeEventListener('message', handler);
+        whisperPendingRejectors.delete(reject);
+        whisperLoadingPromise = null;
+        resetWhisperWorker('load error: ' + data); // 状態リセットして次回リトライ可能に
+        reject(new Error('Whisperモデル読込失敗: ' + data));
+      }
+    };
+    worker.addEventListener('message', handler);
+    worker.postMessage({ type: 'load', data: { model } });
+  });
+  return withTimeout(
+    whisperLoadingPromise,
+    5 * 60 * 1000,
+    'Whisperモデル読込が5分以上かかりタイムアウトしました。ネット接続を確認するか、再試行してください。'
+  ).catch((err) => {
+    resetWhisperWorker('load timeout/error');
+    throw err;
+  });
+}
+
+async function transcribeWithWorker(audio) {
+  if (!whisperWorkerReady) throw new Error('Whisperモデルが未読込です');
+  const worker = getWhisperWorker();
+  const transcribePromise = new Promise((resolve, reject) => {
+    whisperPendingRejectors.add(reject);
+    const handler = (e) => {
+      const { type, data, msg } = e.data;
+      if (type === 'log') {
+        console.log('[Whisper Worker]', msg);
+        if (typeof appendAudioLog === 'function') appendAudioLog('[Worker] ' + msg, 'info');
+      } else if (type === 'result') {
+        worker.removeEventListener('message', handler);
+        whisperPendingRejectors.delete(reject);
+        resolve(data);
+      } else if (type === 'error') {
+        worker.removeEventListener('message', handler);
+        whisperPendingRejectors.delete(reject);
+        reject(new Error('文字起こし失敗: ' + data));
+      }
+    };
+    worker.addEventListener('message', handler);
+    // Transfer the audio buffer to the worker (avoids copying)
+    worker.postMessage({ type: 'transcribe', data: { audio } }, [audio.buffer]);
+  });
+  return withTimeout(
+    transcribePromise,
+    15 * 60 * 1000,
+    '文字起こしが15分以上かかりタイムアウトしました。動画が長すぎる可能性があります。'
+  );
+}
+
+async function extractAudioSamples(file, statusEl) {
+  // Strategy 1 (PRIMARY): FFmpeg.wasm — runs in its own Worker, does NOT block main thread.
+  // This avoids the "Page Unresponsive" warning that Web Audio causes for longer videos.
+  try {
+    if (statusEl) statusEl.textContent = '🎙 音声を抽出中... (FFmpeg.wasm)';
+    return await decodeWithFFmpeg(file, statusEl);
+  } catch (e1) {
+    console.warn('FFmpeg.wasm decode failed, falling back to Web Audio:', e1 && e1.message);
+    // Strategy 2 (FALLBACK): Web Audio — blocks main thread briefly, only used if FFmpeg can't load.
+    if (statusEl) statusEl.textContent = '🎙 FFmpeg失敗、Web Audioで再試行中...';
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      return await decodeWithWebAudio(arrayBuffer);
+    } catch (e2) {
+      throw new Error(`音声デコード失敗。MP4(AAC音声)形式に変換して再試行してください。詳細: FFmpeg=${e1.message} / WebAudio=${e2.message}`);
+    }
+  }
+}
+
+async function decodeWithWebAudio(arrayBuffer) {
+  // Use DEFAULT sample rate (forcing 16000 in constructor breaks codec decoding in many browsers)
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  let audioBuffer;
+  try {
+    audioBuffer = await audioContext.decodeAudioData(arrayBuffer.slice(0));
+  } finally {
+    audioContext.close();
+  }
+  // Mix down to mono
+  const length = audioBuffer.length;
+  const numChannels = audioBuffer.numberOfChannels;
+  const mono = new Float32Array(length);
+  for (let ch = 0; ch < numChannels; ch++) {
+    const data = audioBuffer.getChannelData(ch);
+    for (let i = 0; i < length; i++) {
+      mono[i] += data[i] / numChannels;
+    }
+  }
+  // Resample to 16kHz using OfflineAudioContext (high-quality)
+  const targetRate = 16000;
+  if (audioBuffer.sampleRate === targetRate) return mono;
+  const targetLength = Math.floor(length * targetRate / audioBuffer.sampleRate);
+  const offlineCtx = new (window.OfflineAudioContext || window.webkitOfflineAudioContext)(1, targetLength, targetRate);
+  const sourceBuffer = offlineCtx.createBuffer(1, length, audioBuffer.sampleRate);
+  sourceBuffer.copyToChannel(mono, 0);
+  const source = offlineCtx.createBufferSource();
+  source.buffer = sourceBuffer;
+  source.connect(offlineCtx.destination);
+  source.start();
+  const resampled = await offlineCtx.startRendering();
+  return resampled.getChannelData(0);
+}
+
+// FFmpeg.wasm fallback
+let ffmpegInstance = null;
+let ffmpegLoading = null;
+
+async function loadFFmpeg(statusEl) {
+  if (ffmpegInstance) return ffmpegInstance;
+  if (ffmpegLoading) return ffmpegLoading;
+  ffmpegLoading = (async () => {
+    if (statusEl) statusEl.textContent = '🎙 FFmpeg.wasm を読み込み中... (初回のみ約30MB)';
+    // CDN フォールバック：jsdelivr が落ちても続行可能
+    const cdnSets = [
+      {
+        ffmpeg: 'https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/+esm',
+        util: 'https://cdn.jsdelivr.net/npm/@ffmpeg/util@0.12.1/+esm',
+        baseURL: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/umd'
+      },
+      {
+        ffmpeg: 'https://esm.sh/@ffmpeg/ffmpeg@0.12.10',
+        util: 'https://esm.sh/@ffmpeg/util@0.12.1',
+        baseURL: 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd'
+      }
+    ];
+    let lastErr = null;
+    for (const cdn of cdnSets) {
+      try {
+        console.log('[FFmpeg] CDN試行:', cdn.ffmpeg);
+        const ffmpegMod = await import(cdn.ffmpeg);
+        const utilMod = await import(cdn.util);
+        const ffmpeg = new ffmpegMod.FFmpeg();
+        await ffmpeg.load({
+          coreURL: await utilMod.toBlobURL(`${cdn.baseURL}/ffmpeg-core.js`, 'text/javascript'),
+          wasmURL: await utilMod.toBlobURL(`${cdn.baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+        });
+        ffmpegInstance = { ffmpeg, fetchFile: utilMod.fetchFile };
+        console.log('[FFmpeg] CDN成功:', cdn.ffmpeg);
+        return ffmpegInstance;
+      } catch (e) {
+        lastErr = e;
+        console.warn('[FFmpeg] CDN失敗:', cdn.ffmpeg, e && e.message);
+      }
+    }
+    ffmpegLoading = null; // 失敗時は次回再試行できるようリセット
+    throw new Error('FFmpeg.wasm を全CDNから読み込めませんでした: ' + (lastErr && lastErr.message));
+  })();
+  return ffmpegLoading;
+}
+
+async function decodeWithFFmpeg(file, statusEl) {
+  const { ffmpeg, fetchFile } = await loadFFmpeg(statusEl);
+  if (statusEl) statusEl.textContent = '🎙 FFmpeg で音声を抽出中...';
+  // Use original file extension to help FFmpeg identify format
+  const ext = (file.name && file.name.includes('.'))
+    ? file.name.substring(file.name.lastIndexOf('.'))
+    : '.mp4';
+  const inputName = 'input' + ext;
+  await ffmpeg.writeFile(inputName, await fetchFile(file));
+  // Extract audio as raw float32 little-endian PCM at 16kHz mono (Whisper-ready)
+  await ffmpeg.exec(['-i', inputName, '-ar', '16000', '-ac', '1', '-f', 'f32le', 'output.raw']);
+  const data = await ffmpeg.readFile('output.raw');
+  try { await ffmpeg.deleteFile(inputName); } catch (e) {}
+  try { await ffmpeg.deleteFile('output.raw'); } catch (e) {}
+  // Convert Uint8Array to Float32Array
+  const u8 = data instanceof Uint8Array ? data : new Uint8Array(data);
+  const buffer = u8.buffer.slice(u8.byteOffset, u8.byteOffset + u8.byteLength);
+  return new Float32Array(buffer);
+}
+
+async function transcribeVideoAudio(file, statusEl) {
+  const t0 = performance.now();
+  console.log('[transcribe] start, file:', file.name, file.type, (file.size/1024/1024).toFixed(2)+'MB');
+  appendAudioLog('モデル読込と音声抽出を並列実行します（ここから時間がかかります）', 'info');
+  // Run Whisper model loading AND audio extraction in PARALLEL
+  // (both use Workers/async I/O, no main-thread blocking)
+  statusEl.textContent = '🎙 モデル読み込み＋音声抽出を並列処理中...';
+  await new Promise(r => setTimeout(r, 50)); // let UI repaint
+
+  let modelDone = false;
+  let audioDone = false;
+  const updateCombinedStatus = (modelMsg, audioMsg) => {
+    const parts = [];
+    if (!modelDone && modelMsg) parts.push('モデル: ' + modelMsg);
+    if (modelDone) parts.push('モデル: ✓完了');
+    if (!audioDone && audioMsg) parts.push('音声: ' + audioMsg);
+    if (audioDone) parts.push('音声: ✓抽出完了');
+    statusEl.textContent = '🎙 ' + parts.join(' / ');
+  };
+
+  let lastModelMsg = '初期化中...';
+  let lastAudioMsg = '開始';
+
+  // Audio extraction uses its own statusEl proxy
+  const audioStatusProxy = {
+    set textContent(msg) {
+      lastAudioMsg = msg.replace(/^🎙\s*/, '');
+      updateCombinedStatus(lastModelMsg, lastAudioMsg);
+    }
+  };
+
+  const modelP = loadWhisperWorker('Xenova/whisper-tiny', (p) => {
+    console.log('[whisper progress]', p.status, p.file || '', p.progress != null ? Math.round(p.progress)+'%' : '');
+    if (p.status === 'progress' && p.progress) {
+      lastModelMsg = `読み込み中 ${Math.round(p.progress)}%`;
+    } else if (p.status === 'download') {
+      lastModelMsg = `DL中 ${p.file || ''}`;
+      appendAudioLog('モデルDL: ' + (p.file || '?'), 'info');
+    } else if (p.status === 'ready') {
+      lastModelMsg = '準備完了';
+    } else if (p.status === 'initiate') {
+      lastModelMsg = `読み込み開始 ${p.file || ''}`;
+      appendAudioLog('モデル読込開始: ' + (p.file || '?'), 'info');
+    }
+    updateCombinedStatus(lastModelMsg, lastAudioMsg);
+  }).then(() => {
+    modelDone = true;
+    appendAudioLog('✓ Whisperモデル準備完了 (' + ((performance.now()-t0)/1000).toFixed(1) + '秒)', 'ok');
+    console.log('[transcribe] model ready', (performance.now()-t0).toFixed(0)+'ms');
+    updateCombinedStatus(lastModelMsg, lastAudioMsg);
+  });
+
+  const audioP = withTimeout(
+    extractAudioSamples(file, audioStatusProxy),
+    5 * 60 * 1000,
+    '音声抽出が5分以上かかりタイムアウトしました。動画ファイルが大きすぎる、または形式に問題がある可能性があります。'
+  ).then(audio => {
+    audioDone = true;
+    console.log('[transcribe] audio extracted', audio.length, 'samples', (performance.now()-t0).toFixed(0)+'ms');
+    if (!audio || audio.length === 0) {
+      appendAudioLog('❌ 音声サンプル数=0：動画に音声トラックがありません', 'error');
+      throw new Error('音声トラックが見つかりませんでした。動画に音声が含まれているか確認してください。');
+    }
+    appendAudioLog('✓ 音声抽出完了: ' + audio.length + 'サンプル (約' + Math.round(audio.length / 16000) + '秒) / 経過' + ((performance.now()-t0)/1000).toFixed(1) + '秒', 'ok');
+    updateCombinedStatus(lastModelMsg, lastAudioMsg);
+    return audio;
+  });
+
+  const [, audio] = await Promise.all([modelP, audioP]);
+
+  // Transcribe in Worker (main thread stays responsive)
+  const durationSec = Math.ceil(audio.length / 16000);
+  statusEl.textContent = `🎙 音声を文字起こし中... (約${durationSec}秒、目安${Math.ceil(durationSec / 30)}〜${Math.ceil(durationSec / 10)}分)`;
+  appendAudioLog('文字起こし推論を開始（約' + durationSec + '秒の音声、目安' + Math.ceil(durationSec / 30) + '〜' + Math.ceil(durationSec / 10) + '分）', 'info');
+  console.log('[transcribe] starting inference,', durationSec, 'sec audio');
+  await new Promise(r => setTimeout(r, 50)); // let UI repaint
+  const result = await transcribeWithWorker(audio);
+  appendAudioLog('✓ 推論完了 (' + ((performance.now()-t0)/1000).toFixed(1) + '秒) / チャンク数: ' + (result?.chunks?.length || 0), 'ok');
+  console.log('[transcribe] inference done', (performance.now()-t0).toFixed(0)+'ms, chunks:', result?.chunks?.length || 0);
+  return result; // { text, chunks: [{ text, timestamp: [start, end] }, ...] }
+}
+
+// Match each screenshot's timestamp to the nearest transcript chunk and populate description automatically
+function annotateScreenshotsWithTranscript(preview, chunks) {
+  if (!chunks || !chunks.length) return 0;
+  let annotated = 0;
+  const blocks = preview.querySelectorAll('.task-block');
+  blocks.forEach(block => {
+    const pEl = block.querySelector('p');
+    if (!pEl) return;
+    const timeSpan = pEl.querySelector('.timestamp');
+    if (!timeSpan) return;
+    // Parse "[M:SS]" or "[H:MM:SS]" format
+    const m = timeSpan.textContent.match(/(\d+):(\d+)(?::(\d+))?/);
+    if (!m) return;
+    let timeSec;
+    if (m[3]) {
+      timeSec = parseInt(m[1], 10) * 3600 + parseInt(m[2], 10) * 60 + parseInt(m[3], 10);
+    } else {
+      timeSec = parseInt(m[1], 10) * 60 + parseInt(m[2], 10);
+    }
+
+    // Strategy 1: chunks that contain (or are near) this time
+    const matchedTexts = [];
+    for (const c of chunks) {
+      if (!c.timestamp) continue;
+      const s = c.timestamp[0];
+      const e = c.timestamp[1] != null ? c.timestamp[1] : (s + 5);
+      if (s == null) continue;
+      if (timeSec >= s - 0.5 && timeSec <= e + 0.5) {
+        const t = (c.text || '').trim();
+        if (t) matchedTexts.push(t);
+      }
+    }
+    let matched = matchedTexts.join(' ');
+
+    // Strategy 2 fallback: closest chunk within 5 seconds
+    if (!matched) {
+      let best = null;
+      let bestDist = Infinity;
+      for (const c of chunks) {
+        if (!c.timestamp || c.timestamp[0] == null) continue;
+        const mid = (c.timestamp[0] + (c.timestamp[1] != null ? c.timestamp[1] : c.timestamp[0])) / 2;
+        const dist = Math.abs(mid - timeSec);
+        if (dist < bestDist) { best = c; bestDist = dist; }
+      }
+      if (best && bestDist < 5) matched = (best.text || '').trim();
+    }
+
+    if (!matched) return;
+
+    // Insert: replace placeholder, or append if there's no user text yet
+    const placeholder = pEl.querySelector('.edit-placeholder');
+    if (placeholder) {
+      placeholder.remove();
+      pEl.appendChild(document.createTextNode(matched));
+      annotated++;
+    } else {
+      const existing = pEl.textContent.replace(timeSpan.textContent, '').trim();
+      if (!existing) {
+        pEl.appendChild(document.createTextNode(matched));
+        annotated++;
+      }
+    }
+  });
+  return annotated;
+}
+
+function insertTranscriptBlock(text, preview) {
+  if (!text) return;
+  const block = document.createElement('div');
+  block.className = 'transcript-block';
+  const heading = document.createElement('h3');
+  heading.className = 'transcript-heading';
+  heading.textContent = '音声書き起こし';
+  const p = document.createElement('p');
+  p.className = 'transcript-text';
+  p.textContent = text;
+  block.appendChild(heading);
+  block.appendChild(p);
+  preview.appendChild(block);
+}
+</script>
+
+</body>
+</html>
