@@ -228,7 +228,7 @@ h1.hero-title .accent { color: var(--primary); }
   z-index: 3;
   box-shadow: 0 4px 12px rgba(255,111,60,0.35);
 }
-.design-card[data-design="C"]::before {
+.design-card[data-design="A"]::before {
   content: '⭐ おすすめ';
   position: absolute; top: 14px; left: 14px;
   background: linear-gradient(135deg, #FFB400 0%, #FF8A00 100%);
@@ -358,7 +358,7 @@ h1.hero-title .accent { color: var(--primary); }
   font-size: 22px;
 }
 .design-guidance strong { color: var(--primary-dark); }
-.design-guidance .pill-c {
+.design-guidance .pill-a {
   display: inline-flex; align-items: center; gap: 4px;
   background: linear-gradient(135deg, #FFB400 0%, #FF8A00 100%);
   color: #fff; padding: 2px 10px; border-radius: 999px;
@@ -1758,16 +1758,16 @@ footer {
     <div class="design-guidance">
       <span class="design-guidance-icon">💡</span>
       <div>
-        <strong>迷ったら <span class="pill-c">⭐ おすすめ C</span> を選んでください。</strong>
-        Timeeブランドカラー（黄色）×実写でほとんどの現場に合います。<br>
-        印刷して掲示するなら白背景（B / D）、スマホ閲覧中心なら黄色（A / C）が見やすいです。
+        <strong>迷ったら <span class="pill-a">⭐ おすすめ A</span> を選んでください。</strong>
+        イラスト × 黄色で親しみやすく、ほとんどの現場に合います。<br>
+        <strong>実際の作業写真をマニュアルに反映させたい</strong>なら実写（C / D）、<strong>印刷して掲示する</strong>なら白背景（B / D）を選んでください。
       </div>
     </div>
 
     <div class="design-grid">
 
-      <label class="design-card" data-design="A">
-        <input type="radio" name="design" value="A">
+      <label class="design-card is-selected" data-design="A">
+        <input type="radio" name="design" value="A" checked>
         <div class="design-card-img">
           <img src="./image/design_a_yellow_illust.png" alt="Design A 黄色背景イラスト">
         </div>
@@ -1800,8 +1800,8 @@ footer {
         </div>
       </label>
 
-      <label class="design-card is-selected" data-design="C">
-        <input type="radio" name="design" value="C" checked>
+      <label class="design-card" data-design="C">
+        <input type="radio" name="design" value="C">
         <div class="design-card-img">
           <img src="./image/design_c_yellow_photo.png" alt="Design C 黄色背景実写">
         </div>
@@ -2269,8 +2269,8 @@ footer {
           </div>
         </li>
         <li>
-          ソースタブに戻り、<strong>変換したメモだけにチェック</strong>。元のWordのチェックは <strong>外す</strong>
-          <div class="warn-note"><strong>⚠ ここを間違えると別物が生成されます。</strong>「変換したメモ」だけにチェック → 他のソースは外す、を必ず確認。</div>
+          ソースタブに戻り、<strong>変換したメモと元のWord(.docx)の両方にチェック</strong>が入っていることを確認
+          <div class="warn-note"><strong>💡 ポイント</strong> 元のWord(.docx)には実際の作業写真が含まれています。両方を選択することで、写真も活用された具体的なマニュアルになります。</div>
           <div class="ss-section">
             <div class="ss-section-label">操作スクリーンショット <span class="ss-section-sub">— ソース一覧でチェック切替</span></div>
             <div class="ss-frame ss-frame-photo">
@@ -2285,8 +2285,8 @@ footer {
                 <div class="ss-caption">
                   <div class="ss-caption-num">4</div>
                   <div class="ss-caption-text">
-                    <strong>「変換したメモ」だけにチェック</strong>
-                    <span class="ss-warn">⚠️ 元のWord(.docx)のチェックを外し、変換メモだけONにします。</span>
+                    <strong>両方にチェックが入っていることを確認</strong>
+                    <span class="ss-warn">💡 元のWord(.docx)には実際の作業写真が入っています。両方ONで写真も活用されます。</span>
                   </div>
                 </div>
                 <span class="ss-caption-meta">画面位置：ソースタブの一覧</span>
@@ -2302,7 +2302,7 @@ footer {
       <div class="phase-num">PHASE 3 — DESIGN & PDF</div>
       <h3 class="phase-title">
         デザインを適用してPDF化する
-        <span style="margin-left:10px;">— 選択中：<span class="selected-design-pill" id="selectedDesignPill"><span class="pill-letter" id="selectedDesignLetter">C</span><span id="selectedDesignName">黄色背景 × 実写</span></span></span>
+        <span style="margin-left:10px;">— 選択中：<span class="selected-design-pill" id="selectedDesignPill"><span class="pill-letter" id="selectedDesignLetter">A</span><span id="selectedDesignName">黄色背景 × イラスト</span></span></span>
       </h3>
       <ol class="phase-steps">
         <li>
@@ -2358,7 +2358,7 @@ footer {
         <li>
           <div class="prompt-card">
             <div class="prompt-card-header">
-              <span class="prompt-card-label">🎨 DESIGN PROMPT — <span id="designPromptLetter">C</span></span>
+              <span class="prompt-card-label">🎨 DESIGN PROMPT — <span id="designPromptLetter">A</span></span>
               <button class="prompt-card-copy" data-target="designPrompt">📋 コピー</button>
             </div>
             <div class="prompt-card-content" id="designPrompt"></div>
@@ -2438,8 +2438,8 @@ footer {
     </div>
 
     <div class="faq-item">
-      <div class="faq-q">スライドを生成したら別物になってしまった</div>
-      <div class="faq-a">ソース一覧で <strong>「変換したメモ」だけにチェック</strong> が入っているか確認してください。元のWord(.docx)のチェックが残っていると、両方の情報をミックスした別物が生成されます。</div>
+      <div class="faq-q">スライドを生成したら写真が反映されない／質素になった</div>
+      <div class="faq-a">ソース一覧で <strong>「変換したメモ」と元のWord(.docx)の両方にチェック</strong> が入っているか確認してください。元のWord(.docx)には実際の作業時の写真が含まれているので、両方を選択することで写真も活用された具体的なマニュアルが生成されます。</div>
     </div>
 
     <div class="faq-item">
@@ -2670,7 +2670,7 @@ const DESIGN_NAMES = {
   D: '白背景 × 実写'
 };
 
-let selectedDesign = 'C';
+let selectedDesign = 'A';
 
 // =================================================
 // STEP 1: Design Selection
@@ -3832,15 +3832,22 @@ async function extractAudioSamples(file, statusEl) {
   // This avoids the "Page Unresponsive" warning that Web Audio causes for longer videos.
   try {
     if (statusEl) statusEl.textContent = '🎙 音声を抽出中... (FFmpeg.wasm)';
-    return await decodeWithFFmpeg(file, statusEl);
+    if (typeof appendAudioLog === 'function') appendAudioLog('音声抽出 方式1: FFmpeg.wasm を試行', 'info');
+    const result = await decodeWithFFmpeg(file, statusEl);
+    if (typeof appendAudioLog === 'function') appendAudioLog('✓ FFmpeg.wasm で音声抽出成功', 'ok');
+    return result;
   } catch (e1) {
     console.warn('FFmpeg.wasm decode failed, falling back to Web Audio:', e1 && e1.message);
+    if (typeof appendAudioLog === 'function') appendAudioLog('FFmpeg.wasm 失敗 → 方式2: Web Audio で再試行: ' + (e1 && e1.message), 'warn');
     // Strategy 2 (FALLBACK): Web Audio — blocks main thread briefly, only used if FFmpeg can't load.
     if (statusEl) statusEl.textContent = '🎙 FFmpeg失敗、Web Audioで再試行中...';
     try {
       const arrayBuffer = await file.arrayBuffer();
-      return await decodeWithWebAudio(arrayBuffer);
+      const result = await decodeWithWebAudio(arrayBuffer);
+      if (typeof appendAudioLog === 'function') appendAudioLog('✓ Web Audio で音声抽出成功', 'ok');
+      return result;
     } catch (e2) {
+      if (typeof appendAudioLog === 'function') appendAudioLog('❌ Web Audio も失敗: ' + (e2 && e2.message), 'error');
       throw new Error(`音声デコード失敗。MP4(AAC音声)形式に変換して再試行してください。詳細: FFmpeg=${e1.message} / WebAudio=${e2.message}`);
     }
   }
@@ -3889,36 +3896,47 @@ async function loadFFmpeg(statusEl) {
   if (ffmpegLoading) return ffmpegLoading;
   ffmpegLoading = (async () => {
     if (statusEl) statusEl.textContent = '🎙 FFmpeg.wasm を読み込み中... (初回のみ約30MB)';
-    // CDN フォールバック：jsdelivr が落ちても続行可能
+    if (typeof appendAudioLog === 'function') appendAudioLog('[FFmpeg] 読み込み開始（初回約30MB）', 'info');
+    // CDN フォールバック構成
+    // ★重要: classWorkerURL を blob 化して渡すことで、
+    //   FFmpegが内部で別オリジンのworker.jsを生成しようとして
+    //   ブロックされる問題（Failed to construct 'Worker'）を回避する。
+    //   814.ffmpeg.js は自己完結型UMDバンドル（外部import無し）なのでblob化可能。
     const cdnSets = [
       {
         ffmpeg: 'https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/+esm',
         util: 'https://cdn.jsdelivr.net/npm/@ffmpeg/util@0.12.1/+esm',
+        classWorker: 'https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/umd/814.ffmpeg.js',
         baseURL: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/umd'
       },
       {
-        ffmpeg: 'https://esm.sh/@ffmpeg/ffmpeg@0.12.10',
-        util: 'https://esm.sh/@ffmpeg/util@0.12.1',
+        ffmpeg: 'https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/esm/index.js',
+        util: 'https://unpkg.com/@ffmpeg/util@0.12.1/dist/esm/index.js',
+        classWorker: 'https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/umd/814.ffmpeg.js',
         baseURL: 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd'
       }
     ];
     let lastErr = null;
     for (const cdn of cdnSets) {
       try {
-        console.log('[FFmpeg] CDN試行:', cdn.ffmpeg);
+        if (typeof appendAudioLog === 'function') appendAudioLog('[FFmpeg] CDN試行: ' + cdn.ffmpeg, 'info');
         const ffmpegMod = await import(cdn.ffmpeg);
         const utilMod = await import(cdn.util);
         const ffmpeg = new ffmpegMod.FFmpeg();
-        await ffmpeg.load({
-          coreURL: await utilMod.toBlobURL(`${cdn.baseURL}/ffmpeg-core.js`, 'text/javascript'),
-          wasmURL: await utilMod.toBlobURL(`${cdn.baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-        });
+        // 各リソースを blob URL 化（cross-origin 制約回避の要）
+        if (typeof appendAudioLog === 'function') appendAudioLog('[FFmpeg] ワーカー・コアをblob化中...', 'info');
+        const classWorkerURL = await utilMod.toBlobURL(cdn.classWorker, 'text/javascript');
+        const coreURL = await utilMod.toBlobURL(`${cdn.baseURL}/ffmpeg-core.js`, 'text/javascript');
+        const wasmURL = await utilMod.toBlobURL(`${cdn.baseURL}/ffmpeg-core.wasm`, 'application/wasm');
+        await ffmpeg.load({ classWorkerURL, coreURL, wasmURL });
         ffmpegInstance = { ffmpeg, fetchFile: utilMod.fetchFile };
+        if (typeof appendAudioLog === 'function') appendAudioLog('[FFmpeg] ✓ 読み込み成功: ' + cdn.ffmpeg, 'ok');
         console.log('[FFmpeg] CDN成功:', cdn.ffmpeg);
         return ffmpegInstance;
       } catch (e) {
         lastErr = e;
         console.warn('[FFmpeg] CDN失敗:', cdn.ffmpeg, e && e.message);
+        if (typeof appendAudioLog === 'function') appendAudioLog('[FFmpeg] ✗ CDN失敗: ' + (e && e.message), 'warn');
       }
     }
     ffmpegLoading = null; // 失敗時は次回再試行できるようリセット
